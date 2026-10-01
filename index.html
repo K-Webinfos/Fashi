@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#082f28">
+<meta name="description" content="Fashi — créations de senteurs et fragrances. La marque de l'élégance.">
+<title>Fashi — La marque de l'élégance</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap');
+
+:root{
+  --ink:#082f28; --ink2:#0e4a3d; --cream:#f7f3eb; --paper:#fffdf8;
+  --wine:#9b174d; --gold:#c89b4b; --muted:#6e746e; --line:rgba(8,47,40,.14);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Manrope,Arial,sans-serif;background:var(--paper);color:var(--ink);overflow-x:hidden}.splash-lock{overflow:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block;width:100%}
+button{font:inherit}
+::selection{background:var(--wine);color:#fff}
+
+.noise{position:fixed;inset:0;pointer-events:none;z-index:1000;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E")}
+.cursor{position:fixed;width:28px;height:28px;border:1px solid rgba(155,23,77,.55);border-radius:50%;pointer-events:none;z-index:999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s;mix-blend-mode:multiply}
+@media(pointer:coarse){.cursor{display:none}}
+
+header{position:fixed;top:0;left:0;right:0;z-index:50;padding:20px 5vw;display:flex;align-items:center;justify-content:space-between;transition:.4s}
+header.scrolled{background:rgba(255,253,248,.88);backdrop-filter:blur(16px);box-shadow:0 8px 30px rgba(8,47,40,.08);padding-top:13px;padding-bottom:13px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{width:52px;height:52px;object-fit:contain;border-radius:50%;background:#fff}
+.brand span{font-family:"Cormorant Garamond",serif;font-size:28px;font-weight:700}
+nav{display:flex;gap:30px;font-size:13px;font-weight:600;letter-spacing:.04em}
+nav a{position:relative;padding:8px 0}
+nav a:after{content:"";position:absolute;left:0;bottom:2px;width:0;height:1px;background:var(--wine);transition:.35s}
+nav a:hover:after{width:100%}
+.nav-cta{padding:11px 18px;border:1px solid var(--ink);border-radius:999px}
+.nav-cta:after{display:none}
+.menu{display:none;border:0;background:none;font-size:25px}
+
+.hero{min-height:100svh;position:relative;display:grid;place-items:center;overflow:hidden;background:linear-gradient(135deg,#f6f1e7 0%,#fffdf8 48%,#e8eee8 100%)}
+.hero:before{content:"";position:absolute;width:65vw;height:65vw;border-radius:50%;background:radial-gradient(circle,rgba(200,155,75,.18),transparent 68%);right:-20vw;top:-15vw;animation:float 9s ease-in-out infinite}
+.hero:after{content:"";position:absolute;width:35vw;height:35vw;border-radius:50%;background:radial-gradient(circle,rgba(155,23,77,.08),transparent 70%);left:-12vw;bottom:-15vw}
+.hero-inner{width:min(1240px,90vw);display:grid;grid-template-columns:1fr .9fr;gap:4vw;align-items:center;padding-top:90px;position:relative;z-index:2}
+.eyebrow{display:flex;align-items:center;gap:10px;color:var(--wine);font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:700;margin-bottom:22px}
+.eyebrow:before{content:"";width:36px;height:1px;background:var(--wine)}
+h1{font-family:"Cormorant Garamond",serif;font-size:clamp(64px,9vw,132px);line-height:.78;letter-spacing:-.055em;font-weight:600}
+h1 em{font-weight:400;color:var(--wine)}
+.hero-copy p{max-width:500px;margin:30px 0;color:#53615a;font-size:16px;line-height:1.8}
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:15px 23px;border-radius:999px;font-size:13px;font-weight:700;transition:.3s;cursor:pointer}
+.btn-primary{background:var(--ink);color:#fff}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(8,47,40,.18)}
+.btn-ghost{border:1px solid var(--line);background:#fff8}
+.btn-ghost:hover{border-color:var(--wine);color:var(--wine)}
+.hero-art{height:min(70vh,720px);position:relative}
+.hero-art .portrait{position:absolute;inset:0 0 0 8%;overflow:hidden;border-radius:48% 48% 8px 8px;box-shadow:0 30px 70px rgba(8,47,40,.15)}
+.hero-art .portrait img{height:100%;object-fit:cover;object-position:center 18%}
+.hero-art .seal{position:absolute;left:-8%;bottom:10%;width:145px;height:145px;border-radius:50%;background:var(--wine);color:#fff;display:grid;place-items:center;text-align:center;font-family:"Cormorant Garamond",serif;font-size:22px;line-height:.9;transform:rotate(-12deg);box-shadow:0 15px 35px rgba(155,23,77,.2);animation:spinSlow 16s linear infinite}
+.scroll{position:absolute;bottom:26px;left:5vw;font-size:10px;letter-spacing:.2em;text-transform:uppercase;writing-mode:vertical-rl;display:flex;gap:10px;align-items:center}
+.scroll:after{content:"";height:50px;width:1px;background:var(--ink);animation:scrollline 1.8s infinite}
+
+.marquee{overflow:hidden;background:var(--ink);color:#fff;padding:15px 0}
+.track{display:flex;width:max-content;animation:marquee 22s linear infinite}
+.track span{font-family:"Cormorant Garamond",serif;font-size:23px;white-space:nowrap;padding:0 24px}
+.track b{color:#d8b566;font-weight:500}
+
+section{padding:110px 5vw}
+.section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:55px}
+.kicker{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--wine);font-weight:700;margin-bottom:12px}
+h2{font-family:"Cormorant Garamond",serif;font-size:clamp(48px,6vw,82px);line-height:.9;font-weight:500;letter-spacing:-.04em}
+.section-head p{max-width:390px;color:var(--muted);line-height:1.8;font-size:14px}
+
+.about{background:var(--cream)}
+.about-grid{width:min(1200px,100%);margin:auto;display:grid;grid-template-columns:.9fr 1.1fr;gap:8vw;align-items:center}
+.about-image{position:relative}
+.about-image img{aspect-ratio:4/5;object-fit:cover;border-radius:2px}
+.about-image:after{content:"";position:absolute;inset:18px -18px -18px 18px;border:1px solid var(--gold);z-index:0}
+.about-image img{position:relative;z-index:1}
+.about-copy .big{font-family:"Cormorant Garamond",serif;font-size:31px;line-height:1.2;margin:25px 0;color:var(--ink2)}
+.about-copy p{color:var(--muted);line-height:1.9;font-size:14px;margin-bottom:16px}
+
+.fragrances{background:#fff;position:relative;overflow:hidden}
+.fragrances:before{content:"";position:absolute;width:420px;height:420px;border-radius:50%;right:-180px;top:80px;background:radial-gradient(circle,rgba(200,155,75,.12),transparent 68%);animation:fragGlow 8s ease-in-out infinite;pointer-events:none}
+.fragrances:after{content:"";position:absolute;width:360px;height:360px;border-radius:50%;left:-180px;bottom:40px;background:radial-gradient(circle,rgba(155,23,77,.06),transparent 70%);animation:fragGlow 10s ease-in-out infinite reverse;pointer-events:none}
+.frag-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;position:relative;z-index:1}
+.frag-card{position:relative;overflow:hidden;aspect-ratio:4/5;background:#eee;cursor:pointer;border-radius:2px;box-shadow:0 12px 35px rgba(8,47,40,.08);transform:translateZ(0);transition:transform .55s cubic-bezier(.2,.7,.2,1),box-shadow .55s}
+.frag-card:nth-child(2),.frag-card:nth-child(5){transform:translateY(24px)}
+.frag-card:hover{transform:translateY(-7px) scale(1.012);box-shadow:0 24px 55px rgba(8,47,40,.16);z-index:3}
+.frag-card:nth-child(2):hover,.frag-card:nth-child(5):hover{transform:translateY(17px) scale(1.012)}
+.frag-card img{height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.7,.2,1),filter .7s}
+.frag-card:hover img{transform:scale(1.055);filter:saturate(1.06) contrast(1.02)}
+.frag-card:after{content:"";position:absolute;inset:0;border:1px solid rgba(255,255,255,.18);pointer-events:none;opacity:0;transition:.4s}
+.frag-card:hover:after{opacity:1}
+.frag-overlay{position:absolute;inset:auto 0 0;padding:24px 22px 22px;background:linear-gradient(transparent,rgba(0,0,0,.78));color:#fff;transform:translateY(5px);transition:transform .45s ease}
+.frag-card:hover .frag-overlay{transform:none}
+.frag-overlay small{font-size:9px;letter-spacing:.16em;text-transform:uppercase;opacity:.9}
+.frag-overlay h3{font-family:"Cormorant Garamond",serif;font-size:31px;line-height:.95;font-weight:500;margin-top:6px}
+.frag-cta{margin-top:42px;display:flex;justify-content:center;position:relative;z-index:2}
+.frag-order-btn{gap:10px;padding:16px 25px;box-shadow:0 12px 30px rgba(8,47,40,.12)}
+.frag-order-btn .arrow{display:inline-block;transition:transform .35s ease}
+.frag-order-btn:hover .arrow{transform:translateX(5px)}
+@keyframes fragGlow{50%{transform:translateY(24px) scale(1.08);opacity:.7}}
+
+.story{background:var(--ink);color:#fff;position:relative;overflow:hidden}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:7vw;align-items:center}
+.story-copy p{color:rgba(255,255,255,.68);line-height:1.9;margin:24px 0;max-width:500px}
+.story-image{position:relative}
+.story-image img{aspect-ratio:1/1;object-fit:cover;border-radius:50%;max-width:560px;margin:auto}
+.story-image:before{content:"";position:absolute;inset:8%;border:1px solid rgba(216,181,102,.55);border-radius:50%;transform:rotate(8deg)}
+.quote{font-family:"Cormorant Garamond",serif;font-size:31px;line-height:1.2;color:#fff;margin-top:35px}
+.gold{color:#d8b566}
+
+.gallery{background:var(--cream)}
+.gallery-grid{columns:3 280px;column-gap:16px}
+.gallery-item{break-inside:avoid;margin-bottom:16px;overflow:hidden;position:relative;cursor:pointer}
+.gallery-item img{transition:transform .7s}
+.gallery-item:hover img{transform:scale(1.04)}
+
+.catalogue{background:#fff;position:relative}
+.catalogue-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:6vw;align-items:center}
+.catalogue-photo{position:relative}
+.catalogue-photo img{aspect-ratio:1.35/1;object-fit:cover}
+.catalogue-photo .stamp{position:absolute;right:-35px;bottom:-30px;background:var(--wine);color:#fff;width:135px;height:135px;border-radius:50%;display:grid;place-items:center;text-align:center;font-family:"Cormorant Garamond",serif;font-size:21px;transform:rotate(8deg)}
+.feature-list{list-style:none;margin:30px 0}
+.feature-list li{padding:16px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;font-size:14px}
+.feature-list span{color:var(--muted)}
+
+.clothes{background:#f0eee8;text-align:center;min-height:430px;display:grid;place-items:center}
+.clothes-inner{max-width:720px}
+.clothes h2{margin-bottom:18px}
+.clothes p{color:var(--muted);line-height:1.8;margin-bottom:28px}
+.coming{display:inline-flex;padding:9px 15px;border:1px solid var(--gold);color:var(--gold);font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-radius:999px}
+
+.contact{background:var(--wine);color:#fff;text-align:center}
+.contact .kicker{color:#f3dca9}
+.contact h2{font-size:clamp(56px,8vw,110px)}
+.contact p{max-width:540px;margin:22px auto 30px;color:rgba(255,255,255,.76);line-height:1.8}
+.contact .btn-primary{background:#fff;color:var(--wine)}
+.contact .btn-ghost{border-color:rgba(255,255,255,.35);color:#fff}
+.social{margin-top:35px;font-size:12px;opacity:.75}
+
+footer{padding:28px 5vw;display:flex;justify-content:space-between;gap:20px;font-size:11px;color:#69736d;background:#fff}
+footer strong{color:var(--ink)}
+.kweb-signature{display:flex;align-items:center;justify-content:flex-end;gap:9px;white-space:nowrap}.kweb-signature img{width:38px;height:38px;object-fit:contain;display:block}@media(max-width:700px){.kweb-signature{justify-content:flex-start;white-space:normal}.kweb-signature img{width:34px;height:34px}}
+
+.reveal{opacity:0;transform:translateY(35px);transition:opacity .9s,transform .9s}
+.reveal.in{opacity:1;transform:none}
+.delay1{transition-delay:.1s}.delay2{transition-delay:.2s}.delay3{transition-delay:.3s}
+
+.lightbox{position:fixed;inset:0;background:rgba(2,17,14,.94);z-index:200;display:none;place-items:center;padding:5vw}
+.lightbox.open{display:grid}
+.lightbox img{max-width:min(1100px,90vw);max-height:88vh;object-fit:contain}
+.lightbox button{position:absolute;top:25px;right:30px;border:0;background:none;color:#fff;font-size:35px;cursor:pointer}
+
+@keyframes float{50%{transform:translateY(25px) scale(1.03)}}
+@keyframes spinSlow{to{transform:rotate(348deg)}}
+@keyframes scrollline{50%{transform:scaleY(.35);transform-origin:top}}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+@media(max-width:850px){
+  nav{display:none}.menu{display:block}.hero-inner,.about-grid,.story-grid,.catalogue-grid{grid-template-columns:1fr}
+  .hero{padding-bottom:70px}.hero-inner{padding-top:120px}.hero-art{height:70vh;order:-1}.hero-art .portrait{inset:0 8% 0 8%}.hero-art .seal{left:0}
+  .section-head{display:block}.section-head p{margin-top:20px}.frag-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.frag-card:nth-child(2),.frag-card:nth-child(5){transform:none}.frag-card:nth-child(2):hover,.frag-card:nth-child(5):hover{transform:translateY(-7px) scale(1.012)}
+  .story-image{order:-1}.story-image img{max-width:390px}.catalogue-photo .stamp{right:0}
+}
+@media(max-width:560px){
+  section{padding:80px 6vw} header{padding-left:6vw;padding-right:6vw}
+  h1{font-size:74px}.hero-art{height:62vh}.hero-art .seal{width:110px;height:110px;font-size:18px}.frag-grid{grid-template-columns:1fr}.frag-card,.frag-card:nth-child(2),.frag-card:nth-child(5){aspect-ratio:4/5;transform:none}.frag-card:nth-child(2):hover,.frag-card:nth-child(5):hover{transform:translateY(-6px) scale(1.01)}
+  footer{display:block}footer div+div{margin-top:8px}
+}
+
+/* Fashi perfume entrance — built in HTML/CSS/JS (no static mockup) */
+.splash{position:fixed;inset:0;z-index:5000;overflow:hidden;background:radial-gradient(circle at 50% 48%,#4b1730 0%,#220f1e 38%,#071f1a 100%);display:grid;place-items:center;color:#fff;transition:opacity .7s ease,visibility .7s ease}
+.splash.hide{opacity:0;visibility:hidden;pointer-events:none}
+.splash-bg{position:absolute;inset:0;overflow:hidden}
+.splash-glow{position:absolute;width:55vw;height:55vw;left:50%;top:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(200,155,75,.28),rgba(155,23,77,.12) 34%,transparent 70%);animation:splashGlow 4s ease-in-out infinite}
+.mist{position:absolute;bottom:-18%;width:70vw;height:70vh;border-radius:50%;filter:blur(30px);opacity:.34;background:radial-gradient(ellipse at 50% 60%,rgba(255,219,190,.5),rgba(230,140,177,.18) 35%,transparent 68%);animation:mistRise 5.5s ease-in-out infinite}
+.mist.m2{width:48vw;height:55vh;left:8%;bottom:-12%;animation-delay:-1.7s;animation-duration:6.5s;opacity:.23}
+.mist.m3{width:50vw;height:58vh;right:2%;bottom:-15%;animation-delay:-3s;animation-duration:7s;opacity:.2}
+.vapor{position:absolute;width:18vw;height:44vh;left:50%;bottom:7%;transform:translateX(-50%);border-radius:50%;border:2px solid rgba(255,226,219,.14);filter:blur(5px);animation:vaporCurl 4.8s ease-in-out infinite}
+.vapor:before,.vapor:after{content:"";position:absolute;border:2px solid rgba(255,226,219,.12);border-radius:50%;filter:blur(4px)}
+.vapor:before{inset:10% -35% 25% 25%;transform:rotate(-24deg)}.vapor:after{inset:28% 18% 2% -40%;transform:rotate(30deg)}
+.petal{position:absolute;width:18px;height:9px;background:linear-gradient(90deg,#8c1b45,#df6a8f);border-radius:100% 0 100% 0;opacity:0;animation:petalFloat 6s linear infinite}
+.p1{left:14%;top:20%;animation-delay:.2s}.p2{left:78%;top:24%;animation-delay:1.2s;transform:rotate(50deg)}.p3{left:24%;top:72%;animation-delay:2.3s;transform:rotate(25deg)}.p4{left:84%;top:70%;animation-delay:3.1s;transform:rotate(80deg)}.p5{left:58%;top:12%;animation-delay:4s;transform:rotate(20deg)}
+.splash-content{position:relative;z-index:3;text-align:center;display:flex;flex-direction:column;align-items:center;padding:24px;animation:splashContentIn .7s .1s both}
+.splash-logo{width:min(430px,72vw);max-height:240px;object-fit:contain;filter:drop-shadow(0 10px 30px rgba(0,0,0,.28));animation:logoBreath 3.5s ease-in-out infinite}
+.splash-tagline{margin-top:12px;font-family:"Cormorant Garamond",serif;font-size:18px;letter-spacing:.24em;color:#f3dca9;text-transform:uppercase}
+.splash-enter{margin-top:38px;display:inline-flex;flex-direction:column;align-items:center;gap:12px;color:#fff;background:none;border:0;cursor:pointer;font-size:10px;letter-spacing:.3em;text-transform:uppercase}
+.splash-enter span{display:grid;place-items:center;width:52px;height:52px;border:1px solid rgba(243,220,169,.7);border-radius:50%;animation:enterPulse 1.8s ease-in-out infinite}
+.splash-enter i{display:block;width:8px;height:8px;border-right:1px solid #f3dca9;border-bottom:1px solid #f3dca9;transform:rotate(45deg) translate(-2px,-2px)}
+.splash-skip{position:absolute;z-index:4;right:24px;bottom:22px;color:rgba(255,255,255,.55);background:none;border:0;font-size:10px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer}
+.splash-credit{position:absolute;left:24px;bottom:18px;z-index:4;display:flex;align-items:center;gap:9px;color:rgba(255,255,255,.62);font-size:10px}.splash-credit img{width:30px;height:30px;object-fit:contain}
+@keyframes splashGlow{50%{transform:translate(-50%,-50%) scale(1.13);opacity:.75}}
+@keyframes mistRise{0%,100%{transform:translateY(10%) rotate(-3deg) scale(.95)}50%{transform:translateY(-13%) rotate(4deg) scale(1.08)}}
+@keyframes vaporCurl{0%,100%{transform:translateX(-50%) translateY(8%) rotate(-5deg) scale(.9);opacity:.3}50%{transform:translateX(-50%) translateY(-8%) rotate(7deg) scale(1.1);opacity:.7}}
+@keyframes petalFloat{0%{opacity:0;transform:translate3d(0,35vh,0) rotate(0deg)}12%{opacity:.85}100%{opacity:0;transform:translate3d(12vw,-85vh,0) rotate(280deg)}}
+@keyframes splashContentIn{from{opacity:0;transform:translateY(20px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes logoBreath{50%{transform:scale(1.035);filter:drop-shadow(0 14px 38px rgba(216,181,102,.22))}}
+@keyframes enterPulse{50%{transform:translateY(4px);box-shadow:0 0 0 12px rgba(243,220,169,.04)}}
+@media(max-width:560px){.splash-tagline{font-size:13px;letter-spacing:.18em}.splash-logo{width:82vw}.splash-credit{left:15px}.splash-skip{right:15px}}
+
+/* Fashi online order / Wave payment */
+.order-wrap{background:linear-gradient(135deg,#fbf7ef 0%,#fff 55%,#f3e9ee 100%);border-top:1px solid var(--line)}
+.order-intro{max-width:760px;margin:0 auto 42px;text-align:center}.order-intro p{margin-top:18px;color:var(--muted);line-height:1.8;font-size:14px}.price-badge{display:inline-flex;align-items:center;gap:8px;margin-top:20px;padding:9px 14px;border-radius:999px;background:rgba(155,23,77,.08);color:var(--wine);font-weight:800;font-size:13px}
+.order-card{width:min(920px,100%);margin:auto;background:#fff;border:1px solid rgba(8,47,40,.1);box-shadow:0 24px 70px rgba(8,47,40,.08);padding:clamp(24px,5vw,48px);border-radius:10px}
+.order-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.field{display:flex;flex-direction:column;gap:8px}.field.full{grid-column:1/-1}.field label{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}.field input,.field textarea,.field select{width:100%;border:1px solid rgba(8,47,40,.15);background:#fffdf9;border-radius:10px;padding:13px 14px;font:inherit;font-size:13px;color:var(--ink);outline:none;transition:.25s}.field textarea{min-height:95px;resize:vertical}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--wine);box-shadow:0 0 0 4px rgba(155,23,77,.07)}
+.scent-builder{display:grid;gap:10px;margin-top:2px}.scent-row{display:grid;grid-template-columns:44px 1fr;gap:10px;align-items:center;animation:scentIn .35s ease both}.scent-index{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:rgba(155,23,77,.07);color:var(--wine);font-family:"Cormorant Garamond",serif;font-size:22px}.scent-row select{width:100%;border:1px solid rgba(8,47,40,.15);background:#fffdf9;border-radius:10px;padding:13px 14px;font:inherit;font-size:13px;color:var(--ink);outline:none;transition:.25s}.scent-row select:focus{border-color:var(--wine);box-shadow:0 0 0 4px rgba(155,23,77,.07)}.scent-help{margin-top:9px;color:var(--muted);font-size:11px;line-height:1.6}.scent-summary{margin-top:12px;padding:12px 14px;border-radius:10px;background:rgba(8,47,40,.045);color:var(--ink);font-size:12px;line-height:1.7}.scent-summary strong{color:var(--wine)}
+@keyframes scentIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.order-choice{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:2px}.choice{border:1px solid rgba(8,47,40,.12);border-radius:10px;padding:14px;cursor:pointer;transition:.25s;background:#fff}.choice:hover,.choice.active{border-color:var(--wine);background:rgba(155,23,77,.035)}.choice input{accent-color:var(--wine);margin-right:8px}.choice strong{font-size:13px}.choice span{display:block;color:var(--muted);font-size:11px;line-height:1.5;margin:7px 0 0 22px}
+.order-total{margin-top:24px;padding:18px 20px;border-radius:10px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:space-between;gap:20px}.order-total small{opacity:.7;text-transform:uppercase;letter-spacing:.12em;font-size:9px}.order-total strong{font-family:"Cormorant Garamond",serif;font-size:30px;font-weight:600;color:#f3dca9}
+.payment-panel{margin-top:18px;border:1px solid rgba(200,155,75,.45);background:#fffaf0;border-radius:12px;padding:22px;display:none}.payment-panel.show{display:block;animation:paymentIn .4s ease both}.payment-grid{display:grid;grid-template-columns:180px 1fr;gap:24px;align-items:center}.wave-qr{width:180px;height:248px;object-fit:contain;background:#fff;border-radius:8px}.payment-copy h3{font-family:"Cormorant Garamond",serif;font-size:32px;font-weight:600;margin-bottom:7px}.payment-copy p{color:var(--muted);font-size:12px;line-height:1.7}.wave-link{display:inline-flex;margin-top:12px;padding:11px 15px;border-radius:999px;background:#12b9eb;color:#fff;font-weight:800;font-size:12px}.receipt-box{margin-top:18px;padding:16px;border:1px dashed rgba(8,47,40,.22);border-radius:10px;background:#fff}.receipt-box label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}.receipt-box input{display:block;margin-top:9px;width:100%;font-size:12px}.receipt-name{margin-top:7px;color:var(--muted);font-size:11px}.order-actions{margin-top:22px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}.whatsapp-order{background:#198754;color:#fff;border:0}.whatsapp-order:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(25,135,84,.18)}.order-note{text-align:center;margin-top:12px;color:var(--muted);font-size:10px;line-height:1.6}
+.order-modal{position:fixed;inset:0;z-index:450;background:rgba(2,17,14,.74);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:20px}.order-modal.open{display:flex}.order-modal-inner{width:min(900px,96vw);max-height:92vh;overflow:auto;background:#fffdf8;border-radius:14px;box-shadow:0 30px 100px rgba(0,0,0,.28);padding:28px;position:relative}.order-modal-close{position:absolute;right:18px;top:14px;border:0;background:none;font-size:32px;color:var(--ink);cursor:pointer}.order-modal h3{font-family:"Cormorant Garamond",serif;font-size:42px;font-weight:500;padding-right:45px}.order-modal-sub{color:var(--muted);font-size:13px;line-height:1.7;margin:7px 0 24px}.order-price-note{color:var(--wine);font-weight:800}
+@keyframes paymentIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(max-width:650px){.order-grid,.order-choice,.payment-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.wave-qr{margin:auto}.order-modal-inner{padding:22px}.order-modal h3{font-size:35px}.order-total{align-items:flex-start;flex-direction:column}.order-total strong{font-size:28px}}
+
+</style>
+</head>
+<body>
+<div class="splash" id="splash" aria-label="Entrée dans l'univers Fashi">
+  <div class="splash-bg">
+    <div class="splash-glow"></div><div class="mist"></div><div class="mist m2"></div><div class="mist m3"></div><div class="vapor"></div>
+    <i class="petal p1"></i><i class="petal p2"></i><i class="petal p3"></i><i class="petal p4"></i><i class="petal p5"></i>
+  </div>
+  <div class="splash-content">
+    <img class="splash-logo" src="assets/logo.jpg" alt="Fashi — La marque de l'élégance">
+    <div class="splash-tagline">La marque de l'élégance</div>
+    <button class="splash-enter" id="enterFashi">Entrer dans l'univers Fashi<span><i></i></span></button>
+  </div>
+  <button class="splash-skip" id="skipFashi">Passer l'introduction</button>
+  <div class="splash-credit"><span>Conçu &amp; développé par</span><img src="assets/kweb-logo.png" alt="K-WEB"></div>
+</div>
+
+<div class="noise"></div><div class="cursor"></div>
+
+<header id="header">
+  <a class="brand" href="#top"><img src="assets/logo.jpg" alt="Fashi"><span>Fashi</span></a>
+  <nav>
+    <a href="#univers">L'univers</a><a href="#fragrances">Fragrances</a><a href="#galerie">Galerie</a><a href="#contact" class="nav-cta">Contact</a>
+  </nav>
+  <button class="menu" aria-label="Menu">☰</button>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-copy reveal">
+      <div class="eyebrow">Créations olfactives</div>
+      <h1>Fashi<br><em>l'élégance</em></h1>
+      <p>Des senteurs pensées pour laisser une empreinte. Fashi crée et propose des fragrances avec une identité raffinée, féminine et contemporaine.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#fragrances">Découvrir les senteurs</a>
+        <a class="btn btn-ghost" href="#contact">Parler à Fashi</a>
+      </div>
+    </div>
+    <div class="hero-art reveal delay2">
+      <div class="portrait"><img src="assets/fashi-portrait.jpg" alt="Fashi"></div>
+      <div class="seal">La marque<br>de<br><b>l'élégance</b></div>
+    </div>
+  </div>
+  <div class="scroll">Défiler</div>
+</section>
+
+<div class="marquee"><div class="track">
+  <span>Fashi <b>✦</b> La marque de l'élégance</span><span>Senteurs <b>✦</b> Fragrances <b>✦</b> Signature</span>
+  <span>Fashi <b>✦</b> La marque de l'élégance</span><span>Senteurs <b>✦</b> Fragrances <b>✦</b> Signature</span>
+</div></div>
+
+<section class="about" id="univers">
+  <div class="about-grid">
+    <div class="about-image reveal"><img src="assets/fashi-seated.jpg" alt="Fashi — création et parfum"></div>
+    <div class="about-copy reveal delay1">
+      <div class="kicker">L'univers Fashi</div>
+      <h2>Une identité qui se porte.</h2>
+      <p class="big">Le parfum ne se voit pas. Il se remarque.</p>
+      <p>Fashi imagine un univers autour de la senteur, de l'élégance et du soin porté aux détails. Chaque création devient une manière de raconter une personnalité et de laisser un souvenir.</p>
+      <p>La marque évolue également vers la mode et les vêtements — une nouvelle collection qui viendra bientôt compléter l'univers Fashi.</p>
+    </div>
+  </div>
+</section>
+
+<section class="fragrances" id="fragrances">
+  <div class="section-head">
+    <div><div class="kicker">Les créations</div><h2>Des fragrances<br>à découvrir.</h2></div>
+    <p>Découvrez les senteurs Fashi, pour femme et pour homme. Chaque bouteille est proposée à <strong>3 500 FCFA</strong>. Choisissez votre fragrance préférée ou laissez Fashi vous conseiller.</p>
+  </div>
+  <div class="frag-grid">
+    <div class="frag-card reveal" data-lightbox="assets/fragrance-1.jpeg"><img src="assets/fragrance-1.jpeg" alt="Fashi — une collection de fragrances"><div class="frag-overlay"><small>Fashi · 3 500 FCFA</small><h3>Une empreinte qui reste.</h3></div></div>
+    <div class="frag-card reveal delay1" data-lightbox="assets/fragrance-2.jpeg"><img src="assets/fragrance-2.jpeg" alt="Fashi — fragrances et élégance"><div class="frag-overlay"><small>Fashi · 3 500 FCFA</small><h3>Le parfum raconte ce que les mots taisent.</h3></div></div>
+    <div class="frag-card reveal delay2" data-lightbox="assets/fragrance-3.jpeg"><img src="assets/fragrance-3.jpeg" alt="Fashi — collection de senteurs"><div class="frag-overlay"><small>Collection disponible</small><h3>Votre présence, en notes.</h3></div></div>
+    <div class="frag-card reveal" data-lightbox="assets/fragrance-4.jpeg"><img src="assets/fragrance-4.jpeg" alt="Fashi — création parfumée"><div class="frag-overlay"><small>Fashi · 3 500 FCFA</small><h3>Un souffle, puis un souvenir.</h3></div></div>
+    <div class="frag-card reveal delay1" data-lightbox="assets/fragrance-5.jpeg"><img src="assets/fragrance-5.jpeg" alt="Fashi — sélection de fragrances"><div class="frag-overlay"><small>Fashi · 3 500 FCFA</small><h3>L'élégance se reconnaît à son sillage.</h3></div></div>
+    <div class="frag-card reveal delay2" data-lightbox="assets/fragrance-6.jpeg"><img src="assets/fragrance-6.jpeg" alt="Fashi — fragrance signature"><div class="frag-overlay"><small>Fashi · 3 500 FCFA</small><h3>Une signature invisible, inoubliable.</h3></div></div>
+  </div>
+  <div class="frag-cta reveal">
+    <button class="btn btn-primary frag-order-btn" type="button" data-open-order>Commander le vôtre · 3 500 FCFA <span class="arrow">→</span></button>
+  </div>
+</section>
+
+<section class="story">
+  <div class="story-grid">
+    <div class="story-copy reveal">
+      <div class="kicker">Fashi, en mouvement</div>
+      <h2>Créer. Suggérer.<br><span class="gold">Marquer.</span></h2>
+      <p>Fashi construit une image de marque où les fragrances rencontrent la mode, la beauté et l'expression personnelle. Le site devient la vitrine digitale de cet univers.</p>
+      <div class="quote">« La marque de l'élégance. »</div>
+    </div>
+    <div class="story-image reveal delay2"><img src="assets/fashi-closeup.jpg" alt="Fashi — fragrance"></div>
+  </div>
+</section>
+
+<section class="gallery" id="galerie">
+  <div class="section-head">
+    <div><div class="kicker">Galerie</div><h2>Fashi en images.</h2></div>
+    <p>Des portraits aux créations, l'identité visuelle de la marque mérite sa propre scène.</p>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item reveal" data-lightbox="assets/fashi-closeup.jpg"><img src="assets/fashi-closeup.jpg" alt=""></div>
+    <div class="gallery-item reveal delay1" data-lightbox="assets/fashi-catalogue.jpg"><img src="assets/fashi-catalogue.jpg" alt=""></div>
+    <div class="gallery-item reveal delay2" data-lightbox="assets/fashi-seated.jpg"><img src="assets/fashi-seated.jpg" alt=""></div>
+    <div class="gallery-item reveal" data-lightbox="assets/perfume-floating.jpg"><img src="assets/perfume-floating.jpg" alt=""></div>
+    <div class="gallery-item reveal delay1" data-lightbox="assets/perfume-collection.jpg"><img src="assets/perfume-collection.jpg" alt=""></div>
+    <div class="gallery-item reveal delay2" data-lightbox="assets/gallery-catalogue-white.jpg"><img src="assets/gallery-catalogue-white.jpg" alt="Fashi — catalogue et création"></div>
+    <div class="gallery-item reveal" data-lightbox="assets/gallery-catalogue-red.jpg"><img src="assets/gallery-catalogue-red.jpg" alt="Fashi — catalogue et élégance"></div>
+    <div class="gallery-item reveal delay1" data-lightbox="assets/gallery-fashion-catalogue.jpg"><img src="assets/gallery-fashion-catalogue.jpg" alt="Fashi — mode et catalogue"></div>
+  </div>
+</section>
+
+<section class="catalogue">
+  <div class="catalogue-grid">
+    <div class="catalogue-photo reveal"><img src="assets/fashi-catalogue.jpg" alt="Catalogue Fashi"><div class="stamp">Voir le<br><b>catalogue</b></div></div>
+    <div class="reveal delay1">
+      <div class="kicker">Catalogue & commande</div>
+      <h2>Votre prochaine<br>signature.</h2>
+      <ul class="feature-list">
+        <li><span>Fragrances</span><strong>Créations Fashi</strong></li>
+        <li><span>Catalogue</span><strong>Disponible sur demande</strong></li>
+        <li><span>Commande</span><strong>Contact direct</strong></li>
+      </ul>
+      <button class="btn btn-primary" type="button" data-open-order>Commander en ligne · 3 500 FCFA</button>
+    </div>
+  </div>
+</section>
+
+<section class="clothes">
+  <div class="clothes-inner reveal">
+    <div class="kicker">Bientôt</div>
+    <h2>Fashi, aussi dans la mode.</h2>
+    <p>Une section dédiée aux vêtements sera ajoutée dès que la nouvelle collection et ses visuels seront disponibles.</p>
+    <span class="coming">Collection vêtements — à venir</span>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="kicker">Parlons de votre senteur</div>
+  <h2>Votre parfum<br>vous attend.</h2>
+  <p>Pour découvrir les créations, demander le catalogue ou passer une commande, contactez directement Fashi.</p>
+  <div class="actions" style="justify-content:center">
+    <a class="btn btn-primary" href="https://wa.me/221781304571" target="_blank" rel="noopener">WhatsApp · +221 78 130 45 71</a>
+    <a class="btn btn-ghost" href="tel:+221781304571">Appeler</a>
+  </div>
+  <div class="social">Fashi · La marque de l'élégance</div>
+</section>
+</main>
+
+<footer><div>© <span id="year"></span> <strong>Fashi</strong>. Tous droits réservés.</div><div>Créations de senteurs & fragrances</div><div class="kweb-signature">Conçu &amp; développé par <strong>K-WEB</strong><img src="assets/kweb-logo.png" alt="K-WEB"></div></footer>
+
+
+<div class="order-modal" id="orderModal" aria-hidden="true">
+  <div class="order-modal-inner" role="dialog" aria-modal="true" aria-labelledby="orderTitle">
+    <button class="order-modal-close" id="closeOrder" aria-label="Fermer">×</button>
+    <h3 id="orderTitle">Commander en ligne</h3>
+    <p class="order-modal-sub">Remplissez les informations ci-dessous. <span class="order-price-note">Chaque bouteille coûte 3 500 FCFA.</span> Après validation, le paiement Wave et l'envoi de la commande à Fashi seront proposés.</p>
+    <form id="orderForm">
+      <div class="order-grid">
+        <div class="field"><label for="clientName">Nom du client</label><input id="clientName" name="clientName" type="text" autocomplete="name" required placeholder="Votre nom"></div>
+        <div class="field"><label for="clientPhone">Numéro de téléphone</label><input id="clientPhone" name="clientPhone" type="tel" autocomplete="tel" required placeholder="77 xxx xx xx"></div>
+        <div class="field"><label for="quantity">Nombre de bouteilles</label><input id="quantity" name="quantity" type="number" min="1" max="99" value="1" required></div>
+        <div class="field"><label for="address">Adresse de livraison <span style="font-weight:500;color:var(--muted)">(facultatif)</span></label><input id="address" name="address" type="text" autocomplete="street-address" placeholder="Adresse si livraison souhaitée"></div>
+        <div class="field full"><label>Votre choix de parfum</label>
+          <div class="order-choice">
+            <label class="choice active"><input type="radio" name="choice" value="known" checked><strong>Je connais le parfum que je veux</strong><span>Indiquez son nom dans le champ ci-dessous.</span></label>
+            <label class="choice"><input type="radio" name="choice" value="suggestion"><strong>Obtenir une suggestion de Fashi</strong><span>Votre demande sera transmise à Fashi via WhatsApp pour vous conseiller.</span></label>
+          </div>
+        </div>
+        <div class="field full" id="perfumeField"><label>Composez votre commande</label>
+          <div class="scent-builder" id="scentBuilder"></div>
+          <div class="scent-help">Vous pouvez mélanger les senteurs librement : par exemple, 2 Homme Galant + 1 Caviar. Chaque bouteille reste à <strong>3 500 FCFA</strong>.</div>
+          <div class="scent-summary" id="scentSummary">Choisissez une senteur pour chaque bouteille.</div>
+        </div>
+        <div class="field full"><label for="orderMessage">Précision pour Fashi <span style="font-weight:500;color:var(--muted)">(facultatif)</span></label><textarea id="orderMessage" name="orderMessage" placeholder="Une préférence, une question ou une précision pour votre commande..."></textarea></div>
+      </div>
+      <div class="order-total"><div><small>Total à payer</small><div id="totalDetail">1 bouteille × 3 500 FCFA</div></div><strong id="orderTotal">3 500 FCFA</strong></div>
+      <div class="payment-panel" id="paymentPanel">
+        <div class="payment-grid">
+          <img class="wave-qr" src="assets/wave-qr-fashi.jpeg" alt="QR code Wave pour payer Fashi">
+          <div class="payment-copy">
+            <h3>Paiement Wave</h3>
+            <p>Scannez le QR code avec Wave ou utilisez le bouton ci-dessous. Vérifiez le montant affiché sur cette commande avant de payer.</p>
+            <p><strong>Montant à payer : <span id="paymentAmount">3 500 FCFA</span></strong></p>
+            <a class="wave-link" href="https://pay.wave.com/m/M_sn_H5PcgjHErr-_/c/sn/" target="_blank" rel="noopener">Ouvrir le paiement Wave ↗</a>
+          </div>
+        </div>
+        <div class="receipt-box">
+          <label for="receipt">Charger le reçu de paiement WAVE</label>
+          <input id="receipt" type="file" accept="image/*,.pdf">
+          <div class="receipt-name" id="receiptName">Aucun reçu sélectionné.</div>
+        </div>
+      </div>
+      <div class="order-actions">
+        <button class="btn btn-primary" type="submit">Afficher le paiement Wave</button>
+        <button class="btn whatsapp-order" id="sendOrder" type="button" style="display:none">Envoyer la commande via WhatsApp</button>
+      </div>
+      <p class="order-note" id="orderNote">Après paiement, sélectionnez votre reçu ci-dessus puis envoyez la commande. WhatsApp s'ouvrira avec les détails ; joignez le reçu dans la conversation avant d'envoyer le message à Fashi.</p>
+    </form>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox"><button aria-label="Fermer">×</button><img src="" alt=""></div>
+
+<script>
+const header=document.getElementById('header');
+window.addEventListener('scroll',()=>header.classList.toggle('scrolled',scrollY>30));
+
+const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+const cursor=document.querySelector('.cursor');
+window.addEventListener('pointermove',e=>{cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px'});
+document.querySelectorAll('a,.btn,.frag-card,.gallery-item,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.width='48px';cursor.style.height='48px'});
+  el.addEventListener('mouseleave',()=>{cursor.style.width='28px';cursor.style.height='28px'});
+});
+
+const lb=document.getElementById('lightbox'), lbImg=lb.querySelector('img');
+document.querySelectorAll('[data-lightbox]').forEach(el=>el.addEventListener('click',()=>{
+  lbImg.src=el.dataset.lightbox; lb.classList.add('open');
+}));
+lb.addEventListener('click',e=>{if(e.target===lb||e.target.tagName==='BUTTON')lb.classList.remove('open')});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('open')});
+
+document.getElementById('year').textContent=new Date().getFullYear();
+
+/* Online order flow — Fashi fragrance catalogue + Wave payment */
+const ORDER_PRICE=3500;
+const orderModal=document.getElementById('orderModal');
+const orderForm=document.getElementById('orderForm');
+const quantity=document.getElementById('quantity');
+const orderTotal=document.getElementById('orderTotal');
+const totalDetail=document.getElementById('totalDetail');
+const paymentAmount=document.getElementById('paymentAmount');
+const paymentPanel=document.getElementById('paymentPanel');
+const sendOrder=document.getElementById('sendOrder');
+const receipt=document.getElementById('receipt');
+const receiptName=document.getElementById('receiptName');
+const perfumeField=document.getElementById('perfumeField');
+const scentBuilder=document.getElementById('scentBuilder');
+const scentSummary=document.getElementById('scentSummary');
+const whatsappNumber='221781304571';
+const scentGroups={
+  femme:['Scandale femme','Éclaire Lattafa','Bianco latté','Secret femme','Velour vanillé','Attirance','Marshmallow blush','J’adore','Interdit rouge','Caviar','Chocolat noir'],
+  homme:['Homme galant','Homme parfait','Ultra Or','Ultra mal','Poussière d’or','Intense wayfarer','Khamra Lattafa','Oud Almalik','Scandal homme','1 Million']
+};
+function formatFCFA(n){return new Intl.NumberFormat('fr-FR').format(n).replace(/\u202f/g,' ')+ ' FCFA';}
+function scentOptions(){
+  return `<option value="" selected disabled>Choisissez une senteur</option><optgroup label="Senteurs femme">${scentGroups.femme.map(x=>`<option>${x}</option>`).join('')}</optgroup><optgroup label="Senteurs homme">${scentGroups.homme.map(x=>`<option>${x}</option>`).join('')}</optgroup>`;
+}
+function buildScentRows(){
+  const qty=Math.max(1,parseInt(quantity.value||'1',10));
+  const current=[...scentBuilder.querySelectorAll('select')].map(s=>s.value);
+  scentBuilder.innerHTML=Array.from({length:qty},(_,i)=>`<div class="scent-row" style="animation-delay:${Math.min(i,8)*45}ms"><div class="scent-index">${i+1}</div><select class="scent-select" aria-label="Senteur bouteille ${i+1}" required>${scentOptions()}</select></div>`).join('');
+  scentBuilder.querySelectorAll('select').forEach((select,i)=>{if(current[i])select.value=current[i];select.addEventListener('change',updateScentSummary)});
+  updateScentSummary();
+}
+function getScentSelections(){return [...scentBuilder.querySelectorAll('select')].map(s=>s.value).filter(Boolean);}
+function updateScentSummary(){
+  const selections=getScentSelections();
+  if(!selections.length){scentSummary.innerHTML='Choisissez une senteur pour chaque bouteille.';return;}
+  const counts={}; selections.forEach(x=>counts[x]=(counts[x]||0)+1);
+  scentSummary.innerHTML='<strong>Votre composition :</strong> '+Object.entries(counts).map(([name,count])=>`${count} × ${name}`).join(' · ');
+}
+function updateOrderTotal(){
+  const qty=Math.max(1,parseInt(quantity.value||'1',10));
+  const total=qty*ORDER_PRICE;
+  totalDetail.textContent=`${qty} bouteille${qty>1?'s':''} × 3 500 FCFA`;
+  orderTotal.textContent=formatFCFA(total);
+  paymentAmount.textContent=formatFCFA(total);
+  if(scentBuilder.children.length!==qty) buildScentRows();
+  else updateScentSummary();
+}
+function openOrder(){
+  orderModal.classList.add('open');orderModal.setAttribute('aria-hidden','false');document.body.classList.add('splash-lock');
+  setTimeout(()=>document.getElementById('clientName').focus(),80);
+  updateOrderTotal();
+}
+function closeOrder(){orderModal.classList.remove('open');orderModal.setAttribute('aria-hidden','true');document.body.classList.remove('splash-lock');}
+buildScentRows();
+document.querySelectorAll('[data-open-order]').forEach(b=>b.addEventListener('click',openOrder));
+document.getElementById('closeOrder').addEventListener('click',closeOrder);
+orderModal.addEventListener('click',e=>{if(e.target===orderModal)closeOrder()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape' && orderModal.classList.contains('open'))closeOrder()});
+quantity.addEventListener('input',()=>{updateOrderTotal();});
+document.querySelectorAll('input[name="choice"]').forEach(r=>r.addEventListener('change',()=>{
+  document.querySelectorAll('.choice').forEach(c=>c.classList.remove('active'));
+  r.closest('.choice').classList.add('active');
+  const suggestion=r.value==='suggestion';
+  perfumeField.style.display=suggestion?'none':'';
+  if(!suggestion) buildScentRows();
+}));
+receipt.addEventListener('change',()=>{receiptName.textContent=receipt.files[0]?`Reçu sélectionné : ${receipt.files[0].name}`:'Aucun reçu sélectionné.'});
+orderForm.addEventListener('submit',e=>{
+  e.preventDefault();
+  const choice=document.querySelector('input[name="choice"]:checked')?.value;
+  if(choice==='known'){
+    const qty=Math.max(1,parseInt(quantity.value||'1',10));
+    const selections=[...scentBuilder.querySelectorAll('select')];
+    if(selections.length!==qty) buildScentRows();
+    const missing=[...scentBuilder.querySelectorAll('select')].some(s=>!s.value);
+    if(missing){scentBuilder.querySelectorAll('select').forEach(s=>s.reportValidity());return;}
+  }
+  updateOrderTotal();
+  paymentPanel.classList.add('show');
+  sendOrder.style.display='inline-flex';
+  paymentPanel.scrollIntoView({behavior:'smooth',block:'center'});
+});
+sendOrder.addEventListener('click',()=>{
+  const qty=Math.max(1,parseInt(quantity.value||'1',10));
+  const total=qty*ORDER_PRICE;
+  const choice=document.querySelector('input[name="choice"]:checked')?.value;
+  const client=document.getElementById('clientName').value.trim();
+  const phone=document.getElementById('clientPhone').value.trim();
+  const address=document.getElementById('address').value.trim();
+  const selections=getScentSelections();
+  const perfume=choice==='suggestion'?'Suggestion de Fashi':(selections.length?Object.entries(selections.reduce((a,x)=>(a[x]=(a[x]||0)+1,a),{})).map(([name,count])=>`${count} × ${name}`).join(' | '):'Parfum à préciser');
+  const note=document.getElementById('orderMessage').value.trim();
+  const receiptLine=receipt.files[0]?`Reçu sélectionné sur le site : ${receipt.files[0].name}. Je joindrai le reçu dans cette conversation.`:'Je vais joindre mon reçu de paiement WAVE dans cette conversation.';
+  const message=`Bonjour Fashi 🌸\n\nJe souhaite passer une commande en ligne.\n\nNom : ${client}\nTéléphone : ${phone}\nQuantité : ${qty} bouteille${qty>1?'s':''}\nParfum : ${perfume}\nAdresse de livraison : ${address||'Pas de livraison / à préciser'}\nTotal : ${formatFCFA(total)}\n\n${note?`Précision : ${note}\n\n`:''}${receiptLine}\n\nMerci !`;
+  window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`,'_blank','noopener');
+});
+</script>
+<script>
+const splash = document.getElementById('splash');
+const enterFashi = document.getElementById('enterFashi');
+const skipFashi = document.getElementById('skipFashi');
+function closeSplash(){ splash.classList.add('hide'); document.body.classList.remove('splash-lock'); setTimeout(()=>splash.remove(),1100); }
+document.body.classList.add('splash-lock');
+enterFashi.addEventListener('click', closeSplash);
+skipFashi.addEventListener('click', closeSplash);
+setTimeout(closeSplash, 2800);
+</script>
+</body>
+</html>
