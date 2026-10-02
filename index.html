@@ -47,6 +47,22 @@ nav a:hover:after{width:100%}
 h1{font-family:"Cormorant Garamond",serif;font-size:clamp(64px,9vw,132px);line-height:.78;letter-spacing:-.055em;font-weight:600}
 h1 em{font-weight:400;color:var(--wine)}
 .hero-copy p{max-width:500px;margin:30px 0;color:#53615a;font-size:16px;line-height:1.8}
+
+/* Fashi temporary news / promotion box */
+.fashi-news{position:relative;overflow:hidden;max-width:520px;margin:24px 0 26px;padding:15px 18px 16px;border:1px solid rgba(155,23,77,.22);border-radius:16px;background:linear-gradient(135deg,rgba(255,255,255,.82),rgba(247,243,235,.9));box-shadow:0 14px 34px rgba(8,47,40,.07);isolation:isolate}
+.fashi-news:before{content:"";position:absolute;inset:-2px;background:linear-gradient(115deg,transparent 10%,rgba(200,155,75,.45) 32%,rgba(155,23,77,.35) 52%,rgba(8,47,40,.28) 72%,transparent 90%);background-size:220% 100%;animation:newsSweep 5.5s linear infinite;z-index:-2}
+.fashi-news:after{content:"";position:absolute;inset:1px;border-radius:15px;background:linear-gradient(135deg,rgba(255,253,248,.97),rgba(247,243,235,.9));z-index:-1}
+.fashi-news-glow{position:absolute;width:150px;height:150px;right:-60px;top:-85px;border-radius:50%;background:radial-gradient(circle,rgba(155,23,77,.16),transparent 68%);animation:newsGlow 4s ease-in-out infinite}
+.fashi-news-top{display:flex;align-items:center;gap:8px;color:var(--wine);font-size:9px;font-weight:800;letter-spacing:.18em}
+.fashi-news-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 0 rgba(200,155,75,.45);animation:newsDot 2s ease-in-out infinite}
+.fashi-news-line{height:1px;flex:1;background:linear-gradient(90deg,rgba(155,23,77,.35),transparent);margin-left:3px}
+.fashi-news-message{margin-top:8px;font-family:"Cormorant Garamond",serif;font-size:22px;line-height:1.05;color:var(--ink);animation:newsText 4.5s ease-in-out infinite}
+.fashi-news-hint{margin-top:6px;color:var(--muted);font-size:9px;letter-spacing:.08em;text-transform:uppercase;animation:newsHint 4.5s ease-in-out infinite}
+@keyframes newsSweep{0%{background-position:180% 0}100%{background-position:-20% 0}}
+@keyframes newsGlow{0%,100%{transform:scale(.9);opacity:.45}50%{transform:scale(1.2);opacity:.9}}
+@keyframes newsDot{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(200,155,75,.4)}50%{transform:scale(1.25);box-shadow:0 0 0 7px rgba(200,155,75,0)}}
+@keyframes newsText{0%,100%{opacity:.72;transform:translateY(1px)}45%{opacity:1;transform:translateY(0)}65%{opacity:.9}}
+@keyframes newsHint{0%,100%{opacity:.5}50%{opacity:.95}}
 .actions{display:flex;gap:12px;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;justify-content:center;padding:15px 23px;border-radius:999px;font-size:13px;font-weight:700;transition:.3s;cursor:pointer}
 .btn-primary{background:var(--ink);color:#fff}
@@ -126,11 +142,40 @@ h2{font-family:"Cormorant Garamond",serif;font-size:clamp(48px,6vw,82px);line-he
 .feature-list li{padding:16px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;font-size:14px}
 .feature-list span{color:var(--muted)}
 
-.clothes{background:#f0eee8;text-align:center;min-height:430px;display:grid;place-items:center}
-.clothes-inner{max-width:720px}
-.clothes h2{margin-bottom:18px}
-.clothes p{color:var(--muted);line-height:1.8;margin-bottom:28px}
-.coming{display:inline-flex;padding:9px 15px;border:1px solid var(--gold);color:var(--gold);font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-radius:999px}
+.clothes{background:linear-gradient(145deg,#f4f0e7 0%,#fffdf8 52%,#f0e6eb 100%);position:relative;overflow:hidden}
+.clothes:before{content:"";position:absolute;width:480px;height:480px;border-radius:50%;right:-220px;top:-120px;background:radial-gradient(circle,rgba(200,155,75,.16),transparent 68%);animation:clothesGlow 9s ease-in-out infinite;pointer-events:none}
+.clothes:after{content:"";position:absolute;width:360px;height:360px;border-radius:50%;left:-190px;bottom:-160px;background:radial-gradient(circle,rgba(155,23,77,.08),transparent 70%);animation:clothesGlow 11s ease-in-out infinite reverse;pointer-events:none}
+.clothes-head{position:relative;z-index:1;display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:42px}
+.clothes-head p{max-width:420px;color:var(--muted);line-height:1.8;font-size:14px}
+.category-switcher{position:relative;z-index:2;display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px}
+.category-toggle{border:1px solid rgba(8,47,40,.14);background:rgba(255,255,255,.72);color:var(--ink);padding:13px 18px;border-radius:999px;cursor:pointer;font-size:12px;font-weight:800;transition:.3s;box-shadow:0 8px 22px rgba(8,47,40,.05)}
+.category-toggle:hover{transform:translateY(-2px);border-color:var(--wine);color:var(--wine)}
+.category-toggle.active{background:var(--ink);color:#fff;border-color:var(--ink);box-shadow:0 12px 28px rgba(8,47,40,.14)}
+.category-panel{position:relative;z-index:1;display:none;animation:categoryIn .55s ease both}
+.category-panel.active{display:block}
+.category-note{display:flex;justify-content:space-between;align-items:center;gap:20px;margin:0 0 18px;padding:15px 17px;border:1px solid rgba(8,47,40,.1);background:rgba(255,255,255,.66);border-radius:12px}
+.category-note strong{font-family:"Cormorant Garamond",serif;font-size:25px;font-weight:600}
+.category-note span{color:var(--wine);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+ .category-note .category-note-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:flex-end}
+.category-order-btn{padding:10px 15px!important;font-size:11px!important;white-space:nowrap}
+.clothes-card .item-order-btn{position:absolute;right:14px;bottom:68px;z-index:4;border:1px solid rgba(255,255,255,.65);background:rgba(255,255,255,.94);color:var(--ink);padding:9px 13px;border-radius:999px;font-size:10px;font-weight:900;letter-spacing:.04em;cursor:pointer;opacity:0;transform:translateY(7px);transition:.3s;box-shadow:0 8px 20px rgba(0,0,0,.14)}
+.clothes-card:hover .item-order-btn,.clothes-card:focus-within .item-order-btn{opacity:1;transform:none}
+.clothes-card .item-order-btn:hover{background:var(--gold);border-color:var(--gold);color:var(--ink);transform:translateY(-2px)}
+@media(max-width:650px){.clothes-card .item-order-btn{opacity:1;transform:none;right:10px;bottom:62px;padding:8px 11px;font-size:9px}.category-note .category-note-actions{justify-content:flex-start;width:100%}}
+.clothes-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.clothes-card{position:relative;overflow:hidden;background:#eee;aspect-ratio:3/4;border-radius:4px;box-shadow:0 14px 34px rgba(8,47,40,.09);cursor:pointer;transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s}
+.clothes-card:hover{transform:translateY(-7px);box-shadow:0 24px 55px rgba(8,47,40,.16);z-index:2}
+.clothes-card img{height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.2,1),filter .7s}
+.clothes-card:hover img{transform:scale(1.055);filter:saturate(1.05) contrast(1.02)}
+.clothes-card:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 45%,rgba(2,17,14,.78));pointer-events:none}
+.clothes-overlay{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:18px 16px;color:#fff;display:flex;align-items:end;justify-content:space-between;gap:12px}
+.clothes-overlay small{font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.82}
+.clothes-overlay h3{font-family:"Cormorant Garamond",serif;font-size:25px;line-height:1;font-weight:600;margin-top:4px}
+.clothes-price{white-space:nowrap;font-size:11px;font-weight:900;color:#f3dca9}
+.clothes-coming{padding:50px 20px;text-align:center;border:1px dashed rgba(8,47,40,.2);border-radius:14px;background:rgba(255,255,255,.55);color:var(--muted)}
+.clothes-coming strong{display:block;font-family:"Cormorant Garamond",serif;font-size:31px;color:var(--ink);margin-bottom:7px}
+@keyframes clothesGlow{50%{transform:translateY(24px) scale(1.08);opacity:.72}}
+@keyframes categoryIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 
 .contact{background:var(--wine);color:#fff;text-align:center}
 .contact .kicker{color:#f3dca9}
@@ -163,11 +208,13 @@ footer strong{color:var(--ink)}
   .hero{padding-bottom:70px}.hero-inner{padding-top:120px}.hero-art{height:70vh;order:-1}.hero-art .portrait{inset:0 8% 0 8%}.hero-art .seal{left:0}
   .section-head{display:block}.section-head p{margin-top:20px}.frag-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.frag-card:nth-child(2),.frag-card:nth-child(5){transform:none}.frag-card:nth-child(2):hover,.frag-card:nth-child(5):hover{transform:translateY(-7px) scale(1.012)}
   .story-image{order:-1}.story-image img{max-width:390px}.catalogue-photo .stamp{right:0}
+  .clothes-head{display:block}.clothes-head p{margin-top:18px}.clothes-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:560px){
   section{padding:80px 6vw} header{padding-left:6vw;padding-right:6vw}
   h1{font-size:74px}.hero-art{height:62vh}.hero-art .seal{width:110px;height:110px;font-size:18px}.frag-grid{grid-template-columns:1fr}.frag-card,.frag-card:nth-child(2),.frag-card:nth-child(5){aspect-ratio:4/5;transform:none}.frag-card:nth-child(2):hover,.frag-card:nth-child(5):hover{transform:translateY(-6px) scale(1.01)}
   footer{display:block}footer div+div{margin-top:8px}
+  .clothes-grid{grid-template-columns:1fr 1fr;gap:10px}.category-note{align-items:flex-start;flex-direction:column}.category-switcher{gap:8px}.category-toggle{padding:11px 14px}.clothes-overlay{padding:14px 12px}.clothes-overlay h3{font-size:21px}.clothes-price{font-size:10px}
 }
 
 /* Fashi perfume entrance — built in HTML/CSS/JS (no static mockup) */
@@ -198,7 +245,7 @@ footer strong{color:var(--ink)}
 @keyframes splashContentIn{from{opacity:0;transform:translateY(20px) scale(.96)}to{opacity:1;transform:none}}
 @keyframes logoBreath{50%{transform:scale(1.035);filter:drop-shadow(0 14px 38px rgba(216,181,102,.22))}}
 @keyframes enterPulse{50%{transform:translateY(4px);box-shadow:0 0 0 12px rgba(243,220,169,.04)}}
-@media(max-width:560px){.splash-tagline{font-size:13px;letter-spacing:.18em}.splash-logo{width:82vw}.splash-credit{left:15px}.splash-skip{right:15px}}
+@media(max-width:560px){.splash-tagline{font-size:13px;letter-spacing:.18em}.splash-logo{width:82vw}.splash-credit{left:15px}.splash-skip{right:15px}.fashi-news{margin-top:20px;padding:14px 15px}.fashi-news-message{font-size:20px}.fashi-news-top{font-size:8px;letter-spacing:.14em}}
 
 /* Fashi online order / Wave payment */
 .order-wrap{background:linear-gradient(135deg,#fbf7ef 0%,#fff 55%,#f3e9ee 100%);border-top:1px solid var(--line)}
@@ -236,7 +283,7 @@ footer strong{color:var(--ink)}
 <header id="header">
   <a class="brand" href="#top"><img src="assets/logo.jpg" alt="Fashi"><span>Fashi</span></a>
   <nav>
-    <a href="#univers">L'univers</a><a href="#fragrances">Fragrances</a><a href="#galerie">Galerie</a><a href="#contact" class="nav-cta">Contact</a>
+    <a href="#univers">L'univers</a><a href="#fragrances">Fragrances</a><a href="#vetements">Mode</a><a href="#galerie">Galerie</a><a href="#contact" class="nav-cta">Contact</a>
   </nav>
   <button class="menu" aria-label="Menu">☰</button>
 </header>
@@ -248,6 +295,15 @@ footer strong{color:var(--ink)}
       <div class="eyebrow">Créations olfactives</div>
       <h1>Fashi<br><em>l'élégance</em></h1>
       <p>Des senteurs pensées pour laisser une empreinte. Fashi crée et propose des fragrances avec une identité raffinée, féminine et contemporaine.</p>
+
+      <!-- NEWS BOX — temporary announcements can be changed here -->
+      <div class="fashi-news" aria-label="Actualités Fashi">
+        <div class="fashi-news-glow"></div>
+        <div class="fashi-news-top"><span class="fashi-news-dot"></span><span>DU NOUVEAU CHEZ FASHI ?</span><span class="fashi-news-line"></span></div>
+        <div class="fashi-news-message">Aucune actualité pour le moment · Revenez bientôt ✦</div>
+        <div class="fashi-news-hint">Promotions · nouveautés · événements</div>
+      </div>
+
       <div class="actions">
         <a class="btn btn-primary" href="#fragrances">Découvrir les senteurs</a>
         <a class="btn btn-ghost" href="#contact">Parler à Fashi</a>
@@ -293,7 +349,7 @@ footer strong{color:var(--ink)}
     <div class="frag-card reveal delay2" data-lightbox="assets/fragrance-6.jpeg"><img src="assets/fragrance-6.jpeg" alt="Fashi — fragrance signature"><div class="frag-overlay"><small>Fashi · 3 500 FCFA</small><h3>Une signature invisible, inoubliable.</h3></div></div>
   </div>
   <div class="frag-cta reveal">
-    <button class="btn btn-primary frag-order-btn" type="button" data-open-order>Commander le vôtre · 3 500 FCFA <span class="arrow">→</span></button>
+    <button class="btn btn-primary frag-order-btn" type="button" data-open-order>Commander en ligne <span class="arrow">→</span></button>
   </div>
 </section>
 
@@ -309,7 +365,92 @@ footer strong{color:var(--ink)}
   </div>
 </section>
 
-<section class="gallery" id="galerie">
+<section class="clothes" id="vetements">
+  <div class="reveal">
+    <div class="clothes-head">
+      <div><div class="kicker">La collection mode</div><h2>Des tenues<br>à porter.</h2></div>
+      <p>Découvrez les premières pièces Fashi. Les collections sont organisées par catégories afin de pouvoir accueillir facilement les prochaines nouveautés.</p>
+    </div>
+
+    <div class="category-switcher" role="tablist" aria-label="Catégories de vêtements">
+      <button class="category-toggle active" type="button" role="tab" aria-selected="true" aria-controls="category-hommes" data-category="hommes">Tenues Hommes sur mesure</button>
+      <button class="category-toggle" type="button" role="tab" aria-selected="false" aria-controls="category-friperie" data-category="friperie">Friperie chemise homme</button>
+      <button class="category-toggle" type="button" role="tab" aria-selected="false" aria-controls="category-couples" data-category="couples">Ensembles de couples</button>
+      <button class="category-toggle" type="button" role="tab" aria-selected="false" aria-controls="category-ldc" data-category="ldc">Maillots LDC</button>
+      <button class="category-toggle" type="button" role="tab" aria-selected="false" aria-controls="category-tissus" data-category="tissus">Tissus de tous types</button>
+      <button class="category-toggle" type="button" role="tab" aria-selected="false" aria-controls="category-pantalons" data-category="pantalons">Pantalons Femmes</button>
+      <button class="category-toggle" type="button" role="tab" aria-selected="false" aria-controls="category-ensembles-femmes" data-category="ensembles-femmes">Ensembles Femmes</button>
+    </div>
+
+    <div class="category-panel active" id="category-hommes" role="tabpanel">
+      <div class="category-note">
+        <strong>Tenues Hommes sur mesure</strong>
+        <span>15 000 FCFA</span>
+        <div class="category-note-actions"><button class="btn btn-primary category-order-btn" type="button" data-category-order="hommes">Commander dans cette catégorie →</button></div>
+      </div>
+      <div class="clothes-grid">
+        <div class="clothes-card reveal" data-lightbox="assets/tenue-homme-01.jpeg"><img src="assets/tenue-homme-01.jpeg" alt="Tenue homme sur mesure Fashi — modèle 1"><div class="clothes-overlay"><div><small>Sur mesure</small><h3>Modèle 01</h3></div><span class="clothes-price">15 000 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="hommes" data-item-name="Modèle 01">Acheter →</button></div><div class="clothes-card reveal delay1" data-lightbox="assets/tenue-homme-02.jpeg"><img src="assets/tenue-homme-02.jpeg" alt="Tenue homme sur mesure Fashi — modèle 2"><div class="clothes-overlay"><div><small>Sur mesure</small><h3>Modèle 02</h3></div><span class="clothes-price">15 000 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="hommes" data-item-name="Modèle 02">Acheter →</button></div><div class="clothes-card reveal delay2" data-lightbox="assets/tenue-homme-03.jpeg"><img src="assets/tenue-homme-03.jpeg" alt="Tenue homme sur mesure Fashi — modèle 3"><div class="clothes-overlay"><div><small>Sur mesure</small><h3>Modèle 03</h3></div><span class="clothes-price">15 000 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="hommes" data-item-name="Modèle 03">Acheter →</button></div><div class="clothes-card reveal delay3" data-lightbox="assets/tenue-homme-04.jpeg"><img src="assets/tenue-homme-04.jpeg" alt="Tenue homme sur mesure Fashi — modèle 4"><div class="clothes-overlay"><div><small>Sur mesure</small><h3>Modèle 04</h3></div><span class="clothes-price">15 000 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="hommes" data-item-name="Modèle 04">Acheter →</button></div><div class="clothes-card reveal" data-lightbox="assets/tenue-homme-05.jpeg"><img src="assets/tenue-homme-05.jpeg" alt="Tenue homme sur mesure Fashi — modèle 5"><div class="clothes-overlay"><div><small>Sur mesure</small><h3>Modèle 05</h3></div><span class="clothes-price">15 000 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="hommes" data-item-name="Modèle 05">Acheter →</button></div><div class="clothes-card reveal delay1" data-lightbox="assets/tenue-homme-06.jpeg"><img src="assets/tenue-homme-06.jpeg" alt="Tenue homme sur mesure Fashi — modèle 6"><div class="clothes-overlay"><div><small>Sur mesure</small><h3>Modèle 06</h3></div><span class="clothes-price">15 000 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="hommes" data-item-name="Modèle 06">Acheter →</button></div><div class="clothes-card reveal delay2" data-lightbox="assets/tenue-homme-07.jpeg"><img src="assets/tenue-homme-07.jpeg" alt="Tenue homme sur mesure Fashi — modèle 7"><div class="clothes-overlay"><div><small>Sur mesure</small><h3>Modèle 07</h3></div><span class="clothes-price">15 000 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="hommes" data-item-name="Modèle 07">Acheter →</button></div><div class="clothes-card reveal delay3" data-lightbox="assets/tenue-homme-08.jpeg"><img src="assets/tenue-homme-08.jpeg" alt="Tenue homme sur mesure Fashi — modèle 8"><div class="clothes-overlay"><div><small>Sur mesure</small><h3>Modèle 08</h3></div><span class="clothes-price">15 000 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="hommes" data-item-name="Modèle 08">Acheter →</button></div><div class="clothes-card reveal" data-lightbox="assets/tenue-homme-09.jpeg"><img src="assets/tenue-homme-09.jpeg" alt="Tenue homme sur mesure Fashi — modèle 9"><div class="clothes-overlay"><div><small>Sur mesure</small><h3>Modèle 09</h3></div><span class="clothes-price">15 000 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="hommes" data-item-name="Modèle 09">Acheter →</button></div><div class="clothes-card reveal delay1" data-lightbox="assets/tenue-homme-10.jpeg"><img src="assets/tenue-homme-10.jpeg" alt="Tenue homme sur mesure Fashi — modèle 10"><div class="clothes-overlay"><div><small>Sur mesure</small><h3>Modèle 10</h3></div><span class="clothes-price">15 000 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="hommes" data-item-name="Modèle 10">Acheter →</button></div>
+      </div>
+    </div><div class="category-panel" id="category-friperie" role="tabpanel">
+      <div class="category-note">
+        <strong>Friperie chemise homme</strong>
+        <span>2 500 FCFA</span>
+        <div class="category-note-actions"><button class="btn btn-primary category-order-btn" type="button" data-category-order="friperie">Commander dans cette catégorie →</button></div>
+      </div>
+      <div class="clothes-grid">
+        <div class="clothes-card reveal" data-lightbox="assets/friperie-chemise-homme-01.jpeg"><img src="assets/friperie-chemise-homme-01.jpeg" alt="Friperie chemise homme Fashi — modèle 1"><div class="clothes-overlay"><div><small>Friperie</small><h3>Modèle 01</h3></div><span class="clothes-price">2 500 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="friperie" data-item-name="Modèle 01">Acheter →</button></div><div class="clothes-card reveal delay1" data-lightbox="assets/friperie-chemise-homme-02.jpeg"><img src="assets/friperie-chemise-homme-02.jpeg" alt="Friperie chemise homme Fashi — modèle 2"><div class="clothes-overlay"><div><small>Friperie</small><h3>Modèle 02</h3></div><span class="clothes-price">2 500 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="friperie" data-item-name="Modèle 02">Acheter →</button></div><div class="clothes-card reveal delay2" data-lightbox="assets/friperie-chemise-homme-03.jpeg"><img src="assets/friperie-chemise-homme-03.jpeg" alt="Friperie chemise homme Fashi — modèle 3"><div class="clothes-overlay"><div><small>Friperie</small><h3>Modèle 03</h3></div><span class="clothes-price">2 500 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="friperie" data-item-name="Modèle 03">Acheter →</button></div><div class="clothes-card reveal delay3" data-lightbox="assets/friperie-chemise-homme-04.jpeg"><img src="assets/friperie-chemise-homme-04.jpeg" alt="Friperie chemise homme Fashi — modèle 4"><div class="clothes-overlay"><div><small>Friperie</small><h3>Modèle 04</h3></div><span class="clothes-price">2 500 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="friperie" data-item-name="Modèle 04">Acheter →</button></div><div class="clothes-card reveal" data-lightbox="assets/friperie-chemise-homme-05.jpeg"><img src="assets/friperie-chemise-homme-05.jpeg" alt="Friperie chemise homme Fashi — modèle 5"><div class="clothes-overlay"><div><small>Friperie</small><h3>Modèle 05</h3></div><span class="clothes-price">2 500 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="friperie" data-item-name="Modèle 05">Acheter →</button></div><div class="clothes-card reveal delay1" data-lightbox="assets/friperie-chemise-homme-06.jpeg"><img src="assets/friperie-chemise-homme-06.jpeg" alt="Friperie chemise homme Fashi — modèle 6"><div class="clothes-overlay"><div><small>Friperie</small><h3>Modèle 06</h3></div><span class="clothes-price">2 500 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="friperie" data-item-name="Modèle 06">Acheter →</button></div>
+      </div>
+    </div><div class="category-panel" id="category-couples" role="tabpanel">
+      <div class="category-note">
+        <strong>Ensembles de couples</strong>
+        <span>Sur demande</span>
+        <div class="category-note-actions"><button class="btn btn-primary category-order-btn" type="button" data-category-order="couples">Commander dans cette catégorie →</button></div>
+      </div>
+      <div class="clothes-grid">
+        <div class="clothes-card reveal" data-lightbox="assets/ensembles-couples-01.jpeg"><img src="assets/ensembles-couples-01.jpeg" alt="Ensembles de couples Fashi — modèle 1"><div class="clothes-overlay"><div><small>Ensembles de couples</small><h3>Modèle 01</h3></div><span class="clothes-price">Sur demande</span></div><button class="item-order-btn" type="button" data-item-order="couples" data-item-name="Modèle 01">Demander le prix →</button></div><div class="clothes-card reveal delay1" data-lightbox="assets/ensembles-couples-02.jpeg"><img src="assets/ensembles-couples-02.jpeg" alt="Ensembles de couples Fashi — modèle 2"><div class="clothes-overlay"><div><small>Ensembles de couples</small><h3>Modèle 02</h3></div><span class="clothes-price">Sur demande</span></div><button class="item-order-btn" type="button" data-item-order="couples" data-item-name="Modèle 02">Demander le prix →</button></div><div class="clothes-card reveal delay2" data-lightbox="assets/ensembles-couples-03.jpeg"><img src="assets/ensembles-couples-03.jpeg" alt="Ensembles de couples Fashi — modèle 3"><div class="clothes-overlay"><div><small>Ensembles de couples</small><h3>Modèle 03</h3></div><span class="clothes-price">Sur demande</span></div><button class="item-order-btn" type="button" data-item-order="couples" data-item-name="Modèle 03">Demander le prix →</button></div><div class="clothes-card reveal delay3" data-lightbox="assets/ensembles-couples-04.jpeg"><img src="assets/ensembles-couples-04.jpeg" alt="Ensembles de couples Fashi — modèle 4"><div class="clothes-overlay"><div><small>Ensembles de couples</small><h3>Modèle 04</h3></div><span class="clothes-price">Sur demande</span></div><button class="item-order-btn" type="button" data-item-order="couples" data-item-name="Modèle 04">Demander le prix →</button></div><div class="clothes-card reveal" data-lightbox="assets/ensembles-couples-05.jpeg"><img src="assets/ensembles-couples-05.jpeg" alt="Ensembles de couples Fashi — modèle 5"><div class="clothes-overlay"><div><small>Ensembles de couples</small><h3>Modèle 05</h3></div><span class="clothes-price">Sur demande</span></div><button class="item-order-btn" type="button" data-item-order="couples" data-item-name="Modèle 05">Demander le prix →</button></div>
+      </div>
+    </div><div class="category-panel" id="category-ldc" role="tabpanel">
+      <div class="category-note">
+        <strong>Maillots LDC</strong>
+        <span>7 500 FCFA</span>
+        <div class="category-note-actions"><button class="btn btn-primary category-order-btn" type="button" data-category-order="ldc">Commander dans cette catégorie →</button></div>
+      </div>
+      <div class="clothes-grid">
+        <div class="clothes-card reveal" data-lightbox="assets/maillots-ldc-01.jpeg"><img src="assets/maillots-ldc-01.jpeg" alt="Maillot LDC Fashi — modèle 1"><div class="clothes-overlay"><div><small>Maillots LDC</small><h3>Modèle 01</h3></div><span class="clothes-price">7 500 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="ldc" data-item-name="Modèle 01">Acheter →</button></div><div class="clothes-card reveal delay1" data-lightbox="assets/maillots-ldc-02.jpeg"><img src="assets/maillots-ldc-02.jpeg" alt="Maillot LDC Fashi — modèle 2"><div class="clothes-overlay"><div><small>Maillots LDC</small><h3>Modèle 02</h3></div><span class="clothes-price">7 500 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="ldc" data-item-name="Modèle 02">Acheter →</button></div><div class="clothes-card reveal delay2" data-lightbox="assets/maillots-ldc-03.jpeg"><img src="assets/maillots-ldc-03.jpeg" alt="Maillot LDC Fashi — modèle 3"><div class="clothes-overlay"><div><small>Maillots LDC</small><h3>Modèle 03</h3></div><span class="clothes-price">7 500 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="ldc" data-item-name="Modèle 03">Acheter →</button></div><div class="clothes-card reveal delay3" data-lightbox="assets/maillots-ldc-04.jpeg"><img src="assets/maillots-ldc-04.jpeg" alt="Maillot LDC Fashi — modèle 4"><div class="clothes-overlay"><div><small>Maillots LDC</small><h3>Modèle 04</h3></div><span class="clothes-price">7 500 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="ldc" data-item-name="Modèle 04">Acheter →</button></div><div class="clothes-card reveal" data-lightbox="assets/maillots-ldc-05.jpeg"><img src="assets/maillots-ldc-05.jpeg" alt="Maillot LDC Fashi — modèle 5"><div class="clothes-overlay"><div><small>Maillots LDC</small><h3>Modèle 05</h3></div><span class="clothes-price">7 500 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="ldc" data-item-name="Modèle 05">Acheter →</button></div><div class="clothes-card reveal delay1" data-lightbox="assets/maillots-ldc-06.jpeg"><img src="assets/maillots-ldc-06.jpeg" alt="Maillot LDC Fashi — modèle 6"><div class="clothes-overlay"><div><small>Maillots LDC</small><h3>Modèle 06</h3></div><span class="clothes-price">7 500 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="ldc" data-item-name="Modèle 06">Acheter →</button></div><div class="clothes-card reveal delay2" data-lightbox="assets/maillots-ldc-07.jpeg"><img src="assets/maillots-ldc-07.jpeg" alt="Maillot LDC Fashi — modèle 7"><div class="clothes-overlay"><div><small>Maillots LDC</small><h3>Modèle 07</h3></div><span class="clothes-price">7 500 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="ldc" data-item-name="Modèle 07">Acheter →</button></div><div class="clothes-card reveal delay3" data-lightbox="assets/maillots-ldc-08.jpeg"><img src="assets/maillots-ldc-08.jpeg" alt="Maillot LDC Fashi — modèle 8"><div class="clothes-overlay"><div><small>Maillots LDC</small><h3>Modèle 08</h3></div><span class="clothes-price">7 500 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="ldc" data-item-name="Modèle 08">Acheter →</button></div><div class="clothes-card reveal" data-lightbox="assets/maillots-ldc-09.jpeg"><img src="assets/maillots-ldc-09.jpeg" alt="Maillot LDC Fashi — modèle 9"><div class="clothes-overlay"><div><small>Maillots LDC</small><h3>Modèle 09</h3></div><span class="clothes-price">7 500 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="ldc" data-item-name="Modèle 09">Acheter →</button></div><div class="clothes-card reveal delay1" data-lightbox="assets/maillots-ldc-10.jpeg"><img src="assets/maillots-ldc-10.jpeg" alt="Maillot LDC Fashi — modèle 10"><div class="clothes-overlay"><div><small>Maillots LDC</small><h3>Modèle 10</h3></div><span class="clothes-price">7 500 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="ldc" data-item-name="Modèle 10">Acheter →</button></div><div class="clothes-card reveal delay2" data-lightbox="assets/maillots-ldc-11.jpeg"><img src="assets/maillots-ldc-11.jpeg" alt="Maillot LDC Fashi — modèle 11"><div class="clothes-overlay"><div><small>Maillots LDC</small><h3>Modèle 11</h3></div><span class="clothes-price">7 500 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="ldc" data-item-name="Modèle 11">Acheter →</button></div>
+      </div>
+    </div><div class="category-panel" id="category-tissus" role="tabpanel">
+      <div class="category-note">
+        <strong>Tissus de tous types</strong>
+        <span>Sur demande</span>
+        <div class="category-note-actions"><button class="btn btn-primary category-order-btn" type="button" data-category-order="tissus">Commander dans cette catégorie →</button></div>
+      </div>
+      <div class="clothes-grid">
+        <div class="clothes-card reveal" data-lightbox="assets/tissus-01.jpeg"><img src="assets/tissus-01.jpeg" alt="Tissus de tous types Fashi — modèle 1"><div class="clothes-overlay"><div><small>Tissus</small><h3>Modèle 01</h3></div><span class="clothes-price">Sur demande</span></div><button class="item-order-btn" type="button" data-item-order="tissus" data-item-name="Modèle 01">Demander le prix →</button></div><div class="clothes-card reveal delay1" data-lightbox="assets/tissus-02.jpeg"><img src="assets/tissus-02.jpeg" alt="Tissus de tous types Fashi — modèle 2"><div class="clothes-overlay"><div><small>Tissus</small><h3>Modèle 02</h3></div><span class="clothes-price">Sur demande</span></div><button class="item-order-btn" type="button" data-item-order="tissus" data-item-name="Modèle 02">Demander le prix →</button></div><div class="clothes-card reveal delay2" data-lightbox="assets/tissus-03.jpeg"><img src="assets/tissus-03.jpeg" alt="Tissus de tous types Fashi — modèle 3"><div class="clothes-overlay"><div><small>Tissus</small><h3>Modèle 03</h3></div><span class="clothes-price">Sur demande</span></div><button class="item-order-btn" type="button" data-item-order="tissus" data-item-name="Modèle 03">Demander le prix →</button></div><div class="clothes-card reveal delay3" data-lightbox="assets/tissus-04.jpeg"><img src="assets/tissus-04.jpeg" alt="Tissus de tous types Fashi — modèle 4"><div class="clothes-overlay"><div><small>Tissus</small><h3>Modèle 04</h3></div><span class="clothes-price">Sur demande</span></div><button class="item-order-btn" type="button" data-item-order="tissus" data-item-name="Modèle 04">Demander le prix →</button></div>
+      </div>
+    </div><div class="category-panel" id="category-pantalons" role="tabpanel">
+      <div class="category-note">
+        <strong>Pantalons Femmes</strong>
+        <span>7 000 FCFA</span>
+        <div class="category-note-actions"><button class="btn btn-primary category-order-btn" type="button" data-category-order="pantalons">Commander dans cette catégorie →</button></div>
+      </div>
+      <div class="clothes-grid">
+        <div class="clothes-card reveal" data-lightbox="assets/pantalons-femmes-01.jpeg"><img src="assets/pantalons-femmes-01.jpeg" alt="Pantalons femmes Fashi — modèle 1"><div class="clothes-overlay"><div><small>Pantalons Femmes</small><h3>Modèle 01</h3></div><span class="clothes-price">7 000 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="pantalons" data-item-name="Modèle 01">Acheter →</button></div><div class="clothes-card reveal delay1" data-lightbox="assets/pantalons-femmes-02.jpeg"><img src="assets/pantalons-femmes-02.jpeg" alt="Pantalons femmes Fashi — modèle 2"><div class="clothes-overlay"><div><small>Pantalons Femmes</small><h3>Modèle 02</h3></div><span class="clothes-price">7 000 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="pantalons" data-item-name="Modèle 02">Acheter →</button></div><div class="clothes-card reveal delay2" data-lightbox="assets/pantalons-femmes-03.jpeg"><img src="assets/pantalons-femmes-03.jpeg" alt="Pantalons femmes Fashi — modèle 3"><div class="clothes-overlay"><div><small>Pantalons Femmes</small><h3>Modèle 03</h3></div><span class="clothes-price">7 000 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="pantalons" data-item-name="Modèle 03">Acheter →</button></div><div class="clothes-card reveal delay3" data-lightbox="assets/pantalons-femmes-04.jpeg"><img src="assets/pantalons-femmes-04.jpeg" alt="Pantalons femmes Fashi — modèle 4"><div class="clothes-overlay"><div><small>Pantalons Femmes</small><h3>Modèle 04</h3></div><span class="clothes-price">7 000 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="pantalons" data-item-name="Modèle 04">Acheter →</button></div><div class="clothes-card reveal" data-lightbox="assets/pantalons-femmes-05.jpeg"><img src="assets/pantalons-femmes-05.jpeg" alt="Pantalons femmes Fashi — modèle 5"><div class="clothes-overlay"><div><small>Pantalons Femmes</small><h3>Modèle 05</h3></div><span class="clothes-price">7 000 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="pantalons" data-item-name="Modèle 05">Acheter →</button></div><div class="clothes-card reveal delay1" data-lightbox="assets/pantalons-femmes-06.jpeg"><img src="assets/pantalons-femmes-06.jpeg" alt="Pantalons femmes Fashi — modèle 6"><div class="clothes-overlay"><div><small>Pantalons Femmes</small><h3>Modèle 06</h3></div><span class="clothes-price">7 000 FCFA</span></div><button class="item-order-btn" type="button" data-item-order="pantalons" data-item-name="Modèle 06">Acheter →</button></div>
+      </div>
+    </div><div class="category-panel" id="category-ensembles-femmes" role="tabpanel">
+      <div class="category-note">
+        <strong>Ensembles Femmes</strong>
+        <span>Sur demande</span>
+        <div class="category-note-actions"><button class="btn btn-primary category-order-btn" type="button" data-category-order="ensembles-femmes">Commander dans cette catégorie →</button></div>
+      </div>
+      <div class="clothes-grid">
+        <div class="clothes-card reveal" data-lightbox="assets/ensembles-femmes-01.jpeg"><img src="assets/ensembles-femmes-01.jpeg" alt="Ensembles femmes Fashi — modèle 1"><div class="clothes-overlay"><div><small>Ensembles Femmes</small><h3>Modèle 01</h3></div><span class="clothes-price">Sur demande</span></div><button class="item-order-btn" type="button" data-item-order="ensembles-femmes" data-item-name="Modèle 01">Demander le prix →</button></div><div class="clothes-card reveal delay1" data-lightbox="assets/ensembles-femmes-02.jpeg"><img src="assets/ensembles-femmes-02.jpeg" alt="Ensembles femmes Fashi — modèle 2"><div class="clothes-overlay"><div><small>Ensembles Femmes</small><h3>Modèle 02</h3></div><span class="clothes-price">Sur demande</span></div><button class="item-order-btn" type="button" data-item-order="ensembles-femmes" data-item-name="Modèle 02">Demander le prix →</button></div><div class="clothes-card reveal delay2" data-lightbox="assets/ensembles-femmes-03.jpeg"><img src="assets/ensembles-femmes-03.jpeg" alt="Ensembles femmes Fashi — modèle 3"><div class="clothes-overlay"><div><small>Ensembles Femmes</small><h3>Modèle 03</h3></div><span class="clothes-price">Sur demande</span></div><button class="item-order-btn" type="button" data-item-order="ensembles-femmes" data-item-name="Modèle 03">Demander le prix →</button></div><div class="clothes-card reveal delay3" data-lightbox="assets/ensembles-femmes-04.jpeg"><img src="assets/ensembles-femmes-04.jpeg" alt="Ensembles femmes Fashi — modèle 4"><div class="clothes-overlay"><div><small>Ensembles Femmes</small><h3>Modèle 04</h3></div><span class="clothes-price">Sur demande</span></div><button class="item-order-btn" type="button" data-item-order="ensembles-femmes" data-item-name="Modèle 04">Demander le prix →</button></div><div class="clothes-card reveal" data-lightbox="assets/ensembles-femmes-05.jpeg"><img src="assets/ensembles-femmes-05.jpeg" alt="Ensembles femmes Fashi — modèle 5"><div class="clothes-overlay"><div><small>Ensembles Femmes</small><h3>Modèle 05</h3></div><span class="clothes-price">Sur demande</span></div><button class="item-order-btn" type="button" data-item-order="ensembles-femmes" data-item-name="Modèle 05">Demander le prix →</button></div><div class="clothes-card reveal delay1" data-lightbox="assets/ensembles-femmes-06.jpeg"><img src="assets/ensembles-femmes-06.jpeg" alt="Ensembles femmes Fashi — modèle 6"><div class="clothes-overlay"><div><small>Ensembles Femmes</small><h3>Modèle 06</h3></div><span class="clothes-price">Sur demande</span></div><button class="item-order-btn" type="button" data-item-order="ensembles-femmes" data-item-name="Modèle 06">Demander le prix →</button></div><div class="clothes-card reveal delay2" data-lightbox="assets/ensembles-femmes-07.jpeg"><img src="assets/ensembles-femmes-07.jpeg" alt="Ensembles femmes Fashi — modèle 7"><div class="clothes-overlay"><div><small>Ensembles Femmes</small><h3>Modèle 07</h3></div><span class="clothes-price">Sur demande</span></div><button class="item-order-btn" type="button" data-item-order="ensembles-femmes" data-item-name="Modèle 07">Demander le prix →</button></div><div class="clothes-card reveal delay3" data-lightbox="assets/ensembles-femmes-08.jpeg"><img src="assets/ensembles-femmes-08.jpeg" alt="Ensembles femmes Fashi — modèle 8"><div class="clothes-overlay"><div><small>Ensembles Femmes</small><h3>Modèle 08</h3></div><span class="clothes-price">Sur demande</span></div><button class="item-order-btn" type="button" data-item-order="ensembles-femmes" data-item-name="Modèle 08">Demander le prix →</button></div><div class="clothes-card reveal" data-lightbox="assets/ensembles-femmes-09.jpeg"><img src="assets/ensembles-femmes-09.jpeg" alt="Ensembles femmes Fashi — modèle 9"><div class="clothes-overlay"><div><small>Ensembles Femmes</small><h3>Modèle 09</h3></div><span class="clothes-price">Sur demande</span></div><button class="item-order-btn" type="button" data-item-order="ensembles-femmes" data-item-name="Modèle 09">Demander le prix →</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="gallery id="galerie">
   <div class="section-head">
     <div><div class="kicker">Galerie</div><h2>Fashi en images.</h2></div>
     <p>Des portraits aux créations, l'identité visuelle de la marque mérite sa propre scène.</p>
@@ -337,17 +478,8 @@ footer strong{color:var(--ink)}
         <li><span>Catalogue</span><strong>Disponible sur demande</strong></li>
         <li><span>Commande</span><strong>Contact direct</strong></li>
       </ul>
-      <button class="btn btn-primary" type="button" data-open-order>Commander en ligne · 3 500 FCFA</button>
+      <button class="btn btn-primary" type="button" data-open-order>Commander en ligne</button>
     </div>
-  </div>
-</section>
-
-<section class="clothes">
-  <div class="clothes-inner reveal">
-    <div class="kicker">Bientôt</div>
-    <h2>Fashi, aussi dans la mode.</h2>
-    <p>Une section dédiée aux vêtements sera ajoutée dès que la nouvelle collection et ses visuels seront disponibles.</p>
-    <span class="coming">Collection vêtements — à venir</span>
   </div>
 </section>
 
@@ -370,34 +502,39 @@ footer strong{color:var(--ink)}
   <div class="order-modal-inner" role="dialog" aria-modal="true" aria-labelledby="orderTitle">
     <button class="order-modal-close" id="closeOrder" aria-label="Fermer">×</button>
     <h3 id="orderTitle">Commander en ligne</h3>
-    <p class="order-modal-sub">Remplissez les informations ci-dessous. <span class="order-price-note">Chaque bouteille coûte 3 500 FCFA.</span> Après validation, le paiement Wave et l'envoi de la commande à Fashi seront proposés.</p>
+    <p class="order-modal-sub">Sélectionnez une catégorie puis l'article souhaité. Le prix est calculé automatiquement lorsqu'il est indiqué. Pour les articles <span class="order-price-note">sur demande</span>, votre demande sera directement transmise à Fashi pour connaître le prix.</p>
     <form id="orderForm">
       <div class="order-grid">
         <div class="field"><label for="clientName">Nom du client</label><input id="clientName" name="clientName" type="text" autocomplete="name" required placeholder="Votre nom"></div>
         <div class="field"><label for="clientPhone">Numéro de téléphone</label><input id="clientPhone" name="clientPhone" type="tel" autocomplete="tel" required placeholder="77 xxx xx xx"></div>
-        <div class="field"><label for="quantity">Nombre de bouteilles</label><input id="quantity" name="quantity" type="number" min="1" max="99" value="1" required></div>
+        <div class="field"><label for="orderCategory">Catégorie</label>
+          <select id="orderCategory" name="orderCategory" required>
+            <option value="" selected disabled>Choisissez une catégorie</option>
+            <option value="fragrances">Fragrances</option>
+            <option value="hommes">Tenues Hommes sur mesure</option>
+            <option value="friperie">Friperie chemise homme</option>
+            <option value="couples">Ensembles de couples</option>
+            <option value="ldc">Maillots LDC</option>
+            <option value="tissus">Tissus de tous types</option>
+            <option value="pantalons">Pantalons Femmes</option>
+            <option value="ensembles-femmes">Ensembles Femmes</option>
+          </select>
+        </div>
+        <div class="field"><label for="orderItem">Article</label>
+          <select id="orderItem" name="orderItem" required disabled><option value="" selected>Choisissez d'abord une catégorie</option></select>
+        </div>
+        <div class="field"><label for="quantity">Quantité</label><input id="quantity" name="quantity" type="number" min="1" max="99" value="1" required></div>
         <div class="field"><label for="address">Adresse de livraison <span style="font-weight:500;color:var(--muted)">(facultatif)</span></label><input id="address" name="address" type="text" autocomplete="street-address" placeholder="Adresse si livraison souhaitée"></div>
-        <div class="field full"><label>Votre choix de parfum</label>
-          <div class="order-choice">
-            <label class="choice active"><input type="radio" name="choice" value="known" checked><strong>Je connais le parfum que je veux</strong><span>Indiquez son nom dans le champ ci-dessous.</span></label>
-            <label class="choice"><input type="radio" name="choice" value="suggestion"><strong>Obtenir une suggestion de Fashi</strong><span>Votre demande sera transmise à Fashi via WhatsApp pour vous conseiller.</span></label>
-          </div>
-        </div>
-        <div class="field full" id="perfumeField"><label>Composez votre commande</label>
-          <div class="scent-builder" id="scentBuilder"></div>
-          <div class="scent-help">Vous pouvez mélanger les senteurs librement : par exemple, 2 Homme Galant + 1 Caviar. Chaque bouteille reste à <strong>3 500 FCFA</strong>.</div>
-          <div class="scent-summary" id="scentSummary">Choisissez une senteur pour chaque bouteille.</div>
-        </div>
-        <div class="field full"><label for="orderMessage">Précision pour Fashi <span style="font-weight:500;color:var(--muted)">(facultatif)</span></label><textarea id="orderMessage" name="orderMessage" placeholder="Une préférence, une question ou une précision pour votre commande..."></textarea></div>
+        <div class="field full"><label for="orderMessage">Précision pour Fashi <span style="font-weight:500;color:var(--muted)">(facultatif)</span></label><textarea id="orderMessage" name="orderMessage" placeholder="Taille, couleur, préférence ou autre précision..."></textarea></div>
       </div>
-      <div class="order-total"><div><small>Total à payer</small><div id="totalDetail">1 bouteille × 3 500 FCFA</div></div><strong id="orderTotal">3 500 FCFA</strong></div>
+      <div class="order-total"><div><small>Total</small><div id="totalDetail">Sélectionnez un article pour afficher le total.</div></div><strong id="orderTotal">—</strong></div>
       <div class="payment-panel" id="paymentPanel">
         <div class="payment-grid">
           <img class="wave-qr" src="assets/wave-qr-fashi.jpeg" alt="QR code Wave pour payer Fashi">
           <div class="payment-copy">
             <h3>Paiement Wave</h3>
-            <p>Scannez le QR code avec Wave ou utilisez le bouton ci-dessous. Vérifiez le montant affiché sur cette commande avant de payer.</p>
-            <p><strong>Montant à payer : <span id="paymentAmount">3 500 FCFA</span></strong></p>
+            <p>Le prix de cet article est connu. Scannez le QR code avec Wave ou utilisez le bouton ci-dessous, puis envoyez votre commande à Fashi.</p>
+            <p><strong>Montant à payer : <span id="paymentAmount">—</span></strong></p>
             <a class="wave-link" href="https://pay.wave.com/m/M_sn_H5PcgjHErr-_/c/sn/" target="_blank" rel="noopener">Ouvrir le paiement Wave ↗</a>
           </div>
         </div>
@@ -408,10 +545,10 @@ footer strong{color:var(--ink)}
         </div>
       </div>
       <div class="order-actions">
-        <button class="btn btn-primary" type="submit">Afficher le paiement Wave</button>
-        <button class="btn whatsapp-order" id="sendOrder" type="button" style="display:none">Envoyer la commande via WhatsApp</button>
+        <button class="btn btn-primary" id="submitOrder" type="submit">Continuer</button>
+        <button class="btn whatsapp-order" id="sendOrder" type="button" style="display:none">Envoyer la demande à Fashi via WhatsApp</button>
       </div>
-      <p class="order-note" id="orderNote">Après paiement, sélectionnez votre reçu ci-dessus puis envoyez la commande. WhatsApp s'ouvrira avec les détails ; joignez le reçu dans la conversation avant d'envoyer le message à Fashi.</p>
+      <p class="order-note" id="orderNote">Pour un article à prix connu, le paiement Wave sera proposé. Pour un article sur demande, WhatsApp s’ouvrira directement pour demander le prix à Fashi.</p>
     </form>
   </div>
 </div>
@@ -441,100 +578,140 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove(
 
 document.getElementById('year').textContent=new Date().getFullYear();
 
-/* Online order flow — Fashi fragrance catalogue + Wave payment */
-const ORDER_PRICE=3500;
+/* Clothing category toggles — ready for future Fashi collections */
+const categoryButtons=document.querySelectorAll('.category-toggle');
+const categoryPanels=document.querySelectorAll('.category-panel');
+categoryButtons.forEach(btn=>btn.addEventListener('click',()=>{
+  const target=btn.dataset.category;
+  categoryButtons.forEach(b=>{const active=b===btn;b.classList.toggle('active',active);b.setAttribute('aria-selected',active?'true':'false')});
+  categoryPanels.forEach(panel=>panel.classList.toggle('active',panel.id===`category-${target}`));
+  const activePanel=document.getElementById(`category-${target}`);
+  if(activePanel) activePanel.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+}));
+
+/* Quick ordering directly from the Mode catalogue */
+document.querySelectorAll('[data-category-order]').forEach(btn=>btn.addEventListener('click',e=>{
+  e.preventDefault();
+  e.stopPropagation();
+  openOrderForCategory(btn.dataset.categoryOrder);
+}));
+document.querySelectorAll('[data-item-order]').forEach(btn=>btn.addEventListener('click',e=>{
+  e.preventDefault();
+  e.stopPropagation();
+  openOrderForCategory(btn.dataset.itemOrder,btn.dataset.itemName);
+}));
+
+/* Online order flow — catalogue, automatic prices + Fashi WhatsApp */
 const orderModal=document.getElementById('orderModal');
 const orderForm=document.getElementById('orderForm');
+const orderCategory=document.getElementById('orderCategory');
+const orderItem=document.getElementById('orderItem');
 const quantity=document.getElementById('quantity');
 const orderTotal=document.getElementById('orderTotal');
 const totalDetail=document.getElementById('totalDetail');
 const paymentAmount=document.getElementById('paymentAmount');
 const paymentPanel=document.getElementById('paymentPanel');
 const sendOrder=document.getElementById('sendOrder');
+const submitOrder=document.getElementById('submitOrder');
 const receipt=document.getElementById('receipt');
 const receiptName=document.getElementById('receiptName');
-const perfumeField=document.getElementById('perfumeField');
-const scentBuilder=document.getElementById('scentBuilder');
-const scentSummary=document.getElementById('scentSummary');
+const orderNote=document.getElementById('orderNote');
 const whatsappNumber='221781304571';
-const scentGroups={
-  femme:['Scandale femme','Éclaire Lattafa','Bianco latté','Secret femme','Velour vanillé','Attirance','Marshmallow blush','J’adore','Interdit rouge','Caviar','Chocolat noir'],
-  homme:['Homme galant','Homme parfait','Ultra Or','Ultra mal','Poussière d’or','Intense wayfarer','Khamra Lattafa','Oud Almalik','Scandal homme','1 Million']
+const categoryMeta={
+  fragrances:{label:'Fragrances',price:3500,items:['Scandale femme','Éclaire Lattafa','Bianco latté','Secret femme','Velour vanillé','Attirance','Marshmallow blush','J’adore','Interdit rouge','Caviar','Chocolat noir','Homme galant','Homme parfait','Ultra Or','Ultra mal','Poussière d’or','Intense wayfarer','Khamra Lattafa','Oud Almalik','Scandal homme','1 Million']},
+  hommes:{label:'Tenues Hommes sur mesure',price:15000,items:Array.from({length:10},(_,i)=>`Modèle ${String(i+1).padStart(2,'0')}`)},
+  friperie:{label:'Friperie chemise homme',price:2500,items:Array.from({length:6},(_,i)=>`Modèle ${String(i+1).padStart(2,'0')}`)},
+  couples:{label:'Ensembles de couples',price:null,items:Array.from({length:5},(_,i)=>`Modèle ${String(i+1).padStart(2,'0')}`)},
+  ldc:{label:'Maillots LDC',price:7500,items:Array.from({length:11},(_,i)=>`Modèle ${String(i+1).padStart(2,'0')}`)},
+  tissus:{label:'Tissus de tous types',price:null,items:Array.from({length:4},(_,i)=>`Modèle ${String(i+1).padStart(2,'0')}`)},
+  pantalons:{label:'Pantalons Femmes',price:7000,items:Array.from({length:6},(_,i)=>`Modèle ${String(i+1).padStart(2,'0')}`)},
+  'ensembles-femmes':{label:'Ensembles Femmes',price:null,items:Array.from({length:9},(_,i)=>`Modèle ${String(i+1).padStart(2,'0')}`)}
 };
-function formatFCFA(n){return new Intl.NumberFormat('fr-FR').format(n).replace(/\u202f/g,' ')+ ' FCFA';}
-function scentOptions(){
-  return `<option value="" selected disabled>Choisissez une senteur</option><optgroup label="Senteurs femme">${scentGroups.femme.map(x=>`<option>${x}</option>`).join('')}</optgroup><optgroup label="Senteurs homme">${scentGroups.homme.map(x=>`<option>${x}</option>`).join('')}</optgroup>`;
+function formatFCFA(n){return new Intl.NumberFormat('fr-FR').format(n).replace(/\u202f/g,' ')+' FCFA';}
+function populateItems(){
+  const key=orderCategory.value;
+  const meta=categoryMeta[key];
+  orderItem.innerHTML='<option value="" selected disabled>Choisissez un article</option>'+(meta?meta.items.map((x,i)=>`<option value="${x}" data-index="${i}">${x}</option>`).join(''):'');
+  orderItem.disabled=!meta;
+  updateOrderTotal();
 }
-function buildScentRows(){
-  const qty=Math.max(1,parseInt(quantity.value||'1',10));
-  const current=[...scentBuilder.querySelectorAll('select')].map(s=>s.value);
-  scentBuilder.innerHTML=Array.from({length:qty},(_,i)=>`<div class="scent-row" style="animation-delay:${Math.min(i,8)*45}ms"><div class="scent-index">${i+1}</div><select class="scent-select" aria-label="Senteur bouteille ${i+1}" required>${scentOptions()}</select></div>`).join('');
-  scentBuilder.querySelectorAll('select').forEach((select,i)=>{if(current[i])select.value=current[i];select.addEventListener('change',updateScentSummary)});
-  updateScentSummary();
-}
-function getScentSelections(){return [...scentBuilder.querySelectorAll('select')].map(s=>s.value).filter(Boolean);}
-function updateScentSummary(){
-  const selections=getScentSelections();
-  if(!selections.length){scentSummary.innerHTML='Choisissez une senteur pour chaque bouteille.';return;}
-  const counts={}; selections.forEach(x=>counts[x]=(counts[x]||0)+1);
-  scentSummary.innerHTML='<strong>Votre composition :</strong> '+Object.entries(counts).map(([name,count])=>`${count} × ${name}`).join(' · ');
-}
+function selectedMeta(){return categoryMeta[orderCategory.value]||null;}
+function selectedPrice(){const meta=selectedMeta();return meta?meta.price:null;}
 function updateOrderTotal(){
+  const meta=selectedMeta();
+  const item=orderItem.value;
   const qty=Math.max(1,parseInt(quantity.value||'1',10));
-  const total=qty*ORDER_PRICE;
-  totalDetail.textContent=`${qty} bouteille${qty>1?'s':''} × 3 500 FCFA`;
-  orderTotal.textContent=formatFCFA(total);
-  paymentAmount.textContent=formatFCFA(total);
-  if(scentBuilder.children.length!==qty) buildScentRows();
-  else updateScentSummary();
+  paymentPanel.classList.remove('show');
+  sendOrder.style.display='none';
+  if(!meta||!item){
+    totalDetail.textContent='Sélectionnez un article pour afficher le total.';
+    orderTotal.textContent='—';
+    paymentAmount.textContent='—';
+    submitOrder.textContent='Continuer';
+    orderNote.textContent='Pour un article à prix connu, le paiement Wave sera proposé. Pour un article sur demande, WhatsApp s’ouvrira directement pour demander le prix à Fashi.';
+    return;
+  }
+  if(meta.price==null){
+    totalDetail.textContent=`${qty} article${qty>1?'s':''} · prix à confirmer auprès de Fashi`;
+    orderTotal.textContent='Sur demande';
+    paymentAmount.textContent='À confirmer';
+    submitOrder.textContent='Demander le prix à Fashi';
+    orderNote.textContent='Le prix de cet article est sur demande. Votre sélection et vos coordonnées seront envoyées à Fashi via WhatsApp.';
+  }else{
+    const total=qty*meta.price;
+    totalDetail.textContent=`${qty} × ${formatFCFA(meta.price)}`;
+    orderTotal.textContent=formatFCFA(total);
+    paymentAmount.textContent=formatFCFA(total);
+    submitOrder.textContent='Afficher le paiement Wave';
+    orderNote.textContent='Après paiement, vous pourrez joindre votre reçu à la conversation WhatsApp avec Fashi.';
+  }
 }
 function openOrder(){
   orderModal.classList.add('open');orderModal.setAttribute('aria-hidden','false');document.body.classList.add('splash-lock');
   setTimeout(()=>document.getElementById('clientName').focus(),80);
   updateOrderTotal();
 }
+function openOrderForCategory(category,item=''){
+  openOrder();
+  orderCategory.value=category;
+  populateItems();
+  if(item){orderItem.value=item;}
+  updateOrderTotal();
+}
 function closeOrder(){orderModal.classList.remove('open');orderModal.setAttribute('aria-hidden','true');document.body.classList.remove('splash-lock');}
-buildScentRows();
-document.querySelectorAll('[data-open-order]').forEach(b=>b.addEventListener('click',openOrder));
+
+document.querySelectorAll('[data-open-order]').forEach(b=>b.addEventListener('click',()=>openOrder()));
 document.getElementById('closeOrder').addEventListener('click',closeOrder);
 orderModal.addEventListener('click',e=>{if(e.target===orderModal)closeOrder()});
-document.addEventListener('keydown',e=>{if(e.key==='Escape' && orderModal.classList.contains('open'))closeOrder()});
-quantity.addEventListener('input',()=>{updateOrderTotal();});
-document.querySelectorAll('input[name="choice"]').forEach(r=>r.addEventListener('change',()=>{
-  document.querySelectorAll('.choice').forEach(c=>c.classList.remove('active'));
-  r.closest('.choice').classList.add('active');
-  const suggestion=r.value==='suggestion';
-  perfumeField.style.display=suggestion?'none':'';
-  if(!suggestion) buildScentRows();
-}));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&orderModal.classList.contains('open'))closeOrder()});
+orderCategory.addEventListener('change',populateItems);
+orderItem.addEventListener('change',updateOrderTotal);
+quantity.addEventListener('input',updateOrderTotal);
 receipt.addEventListener('change',()=>{receiptName.textContent=receipt.files[0]?`Reçu sélectionné : ${receipt.files[0].name}`:'Aucun reçu sélectionné.'});
 orderForm.addEventListener('submit',e=>{
   e.preventDefault();
-  const choice=document.querySelector('input[name="choice"]:checked')?.value;
-  if(choice==='known'){
-    const qty=Math.max(1,parseInt(quantity.value||'1',10));
-    const selections=[...scentBuilder.querySelectorAll('select')];
-    if(selections.length!==qty) buildScentRows();
-    const missing=[...scentBuilder.querySelectorAll('select')].some(s=>!s.value);
-    if(missing){scentBuilder.querySelectorAll('select').forEach(s=>s.reportValidity());return;}
-  }
+  const meta=selectedMeta();
+  const item=orderItem.value;
+  if(!meta||!item){orderCategory.reportValidity();if(!meta)return;orderItem.reportValidity();return;}
   updateOrderTotal();
+  if(meta.price==null){sendOrder.click();return;}
   paymentPanel.classList.add('show');
   sendOrder.style.display='inline-flex';
   paymentPanel.scrollIntoView({behavior:'smooth',block:'center'});
 });
 sendOrder.addEventListener('click',()=>{
+  const meta=selectedMeta();
+  const item=orderItem.value;
+  if(!meta||!item)return;
   const qty=Math.max(1,parseInt(quantity.value||'1',10));
-  const total=qty*ORDER_PRICE;
-  const choice=document.querySelector('input[name="choice"]:checked')?.value;
   const client=document.getElementById('clientName').value.trim();
   const phone=document.getElementById('clientPhone').value.trim();
   const address=document.getElementById('address').value.trim();
-  const selections=getScentSelections();
-  const perfume=choice==='suggestion'?'Suggestion de Fashi':(selections.length?Object.entries(selections.reduce((a,x)=>(a[x]=(a[x]||0)+1,a),{})).map(([name,count])=>`${count} × ${name}`).join(' | '):'Parfum à préciser');
   const note=document.getElementById('orderMessage').value.trim();
-  const receiptLine=receipt.files[0]?`Reçu sélectionné sur le site : ${receipt.files[0].name}. Je joindrai le reçu dans cette conversation.`:'Je vais joindre mon reçu de paiement WAVE dans cette conversation.';
-  const message=`Bonjour Fashi 🌸\n\nJe souhaite passer une commande en ligne.\n\nNom : ${client}\nTéléphone : ${phone}\nQuantité : ${qty} bouteille${qty>1?'s':''}\nParfum : ${perfume}\nAdresse de livraison : ${address||'Pas de livraison / à préciser'}\nTotal : ${formatFCFA(total)}\n\n${note?`Précision : ${note}\n\n`:''}${receiptLine}\n\nMerci !`;
+  const total=meta.price==null?null:qty*meta.price;
+  const priceLine=meta.price==null?'Prix à demander à Fashi':`Prix affiché : ${formatFCFA(meta.price)} / article · Total : ${formatFCFA(total)}`;
+  const receiptLine=receipt.files[0]?`Reçu sélectionné sur le site : ${receipt.files[0].name}. Je joindrai le reçu dans cette conversation.`:(meta.price!=null?'Je vais joindre mon reçu de paiement WAVE dans cette conversation.':'');
+  const message=`Bonjour Fashi 🌸\n\nJe souhaite passer une commande / demander le prix d’un article.\n\nCatégorie : ${meta.label}\nArticle : ${item}\nQuantité : ${qty}\n${priceLine}\nNom : ${client}\nTéléphone : ${phone}\nAdresse de livraison : ${address||'À préciser'}\n${note?`\nPrécision : ${note}\n`:''}${receiptLine?`\n${receiptLine}\n`:''}\nMerci !`;
   window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`,'_blank','noopener');
 });
 </script>
